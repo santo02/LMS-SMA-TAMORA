@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 
 Route::get('/login', [LoginController::class, 'index']);
-Route::post('/login-proses', [LoginController::class, 'authentikasi']);
+Route::post('/login-proses', [LoginController::class, 'authentikasi'])->name('login-post');
 
 Route::middleware(['auth', "userAccess:student"])->group(function () {
     Route::get('/student', function () {

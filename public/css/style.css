@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+*{
+    font-family: 'Roboto', sans-serif;
+}
+.left{
+    background: url("/image/school.png");
+    height: 670px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+}
+
+.brand{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.logo{
+ height: 80px;
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+ margin-bottom: 20px;
+ margin-top: 10px;
+ opacity: 0.65;
+}
+
+.kanan{
+   padding-top:85px ;
+    color: #17A2B8;
+}
+#button{
+    border-radius:23px;
+    background-color: #17A2B8;
+    color: white;
+    width: 96px;
+    margin-top: 15px;
+}
+.asterisk{
+    color:red;
+}
+ h2{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

@@ -12,7 +12,7 @@
 
 <body>
     <div class="headers">
-        <img src="image/logo.png" alt="" class="img-responsive logo">
+        <img src="image/logo1.png" alt="" class="img-responsive logo">
     </div>
     <div class=" float-right">
         <a href={{"/login"}}><button class="btn text-uppercase text-white login">Login</button></a>
