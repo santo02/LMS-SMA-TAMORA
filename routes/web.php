@@ -22,6 +22,15 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login-proses', [LoginController::class, 'authentikasi']);
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', "userAccess:student"])->group(function () {
+    Route::get('/student', function () {
+        return "student";
+    });
+});
+
+Route::middleware(['auth', "userAccess:teacher"])->group(function () {
+    Route::get('/teacher', function () {
+        return "teacher";
+    });
     
 });

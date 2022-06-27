@@ -15,14 +15,12 @@ class UserAccess
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, ...$role)
     {
-        $user = Auth::user();
-
-        if ((trim($role) == 'admin' && !$user->is_admin) || (trim($role) == 'user' && $user->is_admin)) {
-            abort(403);
+        if (in_array($request->user()->role, $role)) {
+            return $next($request);
         }
 
-        return $next($request);
+        return redirect('/dashboard');
     }
 }
