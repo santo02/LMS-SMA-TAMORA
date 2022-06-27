@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>List account siswa</title>
-    <link rel ="stylesheet" href="./list-siswa.css">
-    <link rel="stylesheet" href="../dashboard-admin/dashboard.css">
-    <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
-    <link rel ="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"/>
-  </head>
-  <body>
+
+@extends('sidebar.sidebar');
+@section('content')
     <div class="List p-3">
-        <h3>Daftar Akun Siswa</h3>
+        <h3>Daftar Akun Guru</h3>
         <div class="d-flex my-3">
-          <a href="/add-siswa" class="ms-auto">
+          <a href="{{Route('addGuru')}}" class="ms-auto">
             <button class="btn-add-custom ">+Add New</button>
           </a>
         </div>
@@ -113,17 +102,4 @@
         <th>Alamat</th>
         <th>Action</th>
     </tfoot>
-      
-    </table>
-    <script src ="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src ="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src ="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-    
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#example').DataTable();
-});
-    </script>
-    </div>
-  </body>
-</html>
+@endsection

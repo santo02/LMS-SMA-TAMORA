@@ -6,8 +6,10 @@
         <link rel="stylesheet" href="sidebar.css" />
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/sidebar.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/dashboard.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/list-style.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"/>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+        {{-- <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> --}}
+        <link rel ="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     </head>
     <body>
         <div class="wrapper">
@@ -39,14 +41,12 @@
                                 <i class="fas fa-chevron-down drop-down"></i ></span>
                         </a>
                         <div class="sub-menu">
-                            <a href="#"
+                            <a href="{{Route('list-guru')}}"
                                 ><i class="fas fa-users"></i
-                                ><span>Guru</span></a
-                            >
-                            <a href="#"
+                                ><span>Guru</span></a>
+                            <a href="{{Route('list-siswa')}}"
                                 ><i class="fas fa-user"></i
-                                ><span>Siswa</span></a
-                            >
+                                ><span>Siswa</span></a>
                         </div>
                     </li>
                     @elseif(Auth::user()->role == 'teacher')
@@ -78,7 +78,7 @@
                     </li>
                     <li class="item" id="profile">
                         <a href="#profile" class="menu-btn">
-                            <i class="fas fa-user-plus"></i>Customer  Service
+                            <i class="fas fa-user-plus"></i>Customer Service
                         </a>
                     </li>
 
@@ -98,6 +98,16 @@
             </div>
 
         </div>
+        <script src ="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src ="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src ="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#example').DataTable();
+});
+</script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $(".sidebar-btn").click(function () {

@@ -28,7 +28,8 @@ class LoginController extends Controller
         ])->onlyInput('email');
     }
     public function logout(){
-
+        auth()->logout();
+        return redirect()->route('home');
     }
 
 }
