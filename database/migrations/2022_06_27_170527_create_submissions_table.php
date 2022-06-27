@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('theacers', function (Blueprint $table) {
+        Schema::create('submissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('NIP')->unique();
-            $table->string('phone');
-            $table->string('address');
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->foreignId('assignment_id')->references('id')->on('assignments')->nullable();
+            $table->foreignId('student_id')->references('id')->on('students');
+            $table->string('file')->nullable(false);
+            $table->timestamps();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('submissions');
     }
 };

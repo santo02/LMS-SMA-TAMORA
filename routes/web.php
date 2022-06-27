@@ -18,16 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 
-Route::get('/login', [LoginController::class, 'index'])->middleware("guest");
-
-
+Route::get('/login', [LoginController::class, 'index'])->middleware("guest")->name('login');
 Route::post('/login-proses', [LoginController::class, 'authentikasi'])->name('login-post');
 
-Route::middleware(['auth', "userAccess:student,teacher"])->group(function () {
+Route::middleware(['auth', "userAccess:student,teacher,admin"])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 });
 
 Route::middleware(['auth', "userAccess:student"])->group(function () {
@@ -44,9 +43,8 @@ Route::middleware(['auth', "userAccess:teacher"])->group(function () {
 });
 
 Route::middleware(['auth', "userAccess:admin"])->group(function () {
-    Route::get('/teacher', function () {
+    Route::get('/admin', function () {
         return "admin";
     });
-
 
 });

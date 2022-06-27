@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login</title>
-        <link rel="stylesheet" href="dashboard.css" />
+        <title>dashboard</title>
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/dashbo.css') }}">
     </head>
     <body>
         <h1 class="title">Dashboard</h1>

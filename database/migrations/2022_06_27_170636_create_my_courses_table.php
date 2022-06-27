@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('admin', function (Blueprint $table) {
-            $table->id('id');
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('phone');
-            $table->string('address');
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+        Schema::create('my_courses', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('course_id')->references('id')->on('courses')->nullable();
+            $table->foreignId('student_id')->references('id')->on('students');
+            $table->timestamps();
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('my_courses');
     }
 };

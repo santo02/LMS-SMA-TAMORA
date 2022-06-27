@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->id('id');
+        Schema::create('teachers', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('NIS')->unique();
+            $table->string('NIP')->unique();
             $table->string('phone');
             $table->string('address');
             $table->timestamp('created_at')->nullable();
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('teachers');
     }
 };
