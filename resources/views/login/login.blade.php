@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="container" action="/login" method="post">
-        @crsf
+        @csrf
         <form class="px-4 py-3">
           <div class="mb-3">
             <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
