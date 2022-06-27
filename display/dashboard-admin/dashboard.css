@@ -1,3 +1,6 @@
+.title{
+    padding: 10px 20px;
+ }
 .dashInfo {
     width: 100%;
     display: flex;
