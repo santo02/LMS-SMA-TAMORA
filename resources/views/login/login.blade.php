@@ -8,8 +8,8 @@
   </head>
   <body>
     <div class="container" action="/login" method="post">
-        @crsf
-        <form class="px-4 py-3">
+      <form class="px-4 py-3">
+          @csrf
           <div class="mb-3">
             <label for="exampleDropdownFormEmail1" class="form-label">Email address</label>
             <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" autofocus required>
