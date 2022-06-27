@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,12 +22,12 @@ Route::get('/', function () {
 
 
 Route::get('/login', [LoginController::class, 'index'])->middleware("guest");
+
+
 Route::post('/login-proses', [LoginController::class, 'authentikasi'])->name('login-post');
 
 Route::middleware(['auth', "userAccess:student,teacher"])->group(function () {
-    Route::get('/dashboard', function () {
-        return "dashboard";
-    });
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 });
 
 Route::middleware(['auth', "userAccess:student"])->group(function () {
@@ -38,5 +40,13 @@ Route::middleware(['auth', "userAccess:teacher"])->group(function () {
     Route::get('/teacher', function () {
         return "teacher";
     });
-    
+
+});
+
+Route::middleware(['auth', "userAccess:admin"])->group(function () {
+    Route::get('/teacher', function () {
+        return "admin";
+    });
+
+
 });
