@@ -21,6 +21,6 @@ class UserAccess
             return $next($request);
         }
 
-        return redirect('/dashboard');
+        return redirect('/login');
     }
 }
