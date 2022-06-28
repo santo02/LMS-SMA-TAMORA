@@ -40,7 +40,7 @@ class TambahSiswaController extends Controller
             'address' => $fields['address'],
         ]);
 
-        return ('berhasil' );
+        return redirect('/list-siswa')->with('success', 'Berhasil menambahkan');
     }
 
 }

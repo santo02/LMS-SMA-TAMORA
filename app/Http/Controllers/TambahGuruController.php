@@ -12,6 +12,7 @@ class TambahGuruController extends Controller
     public function index(){
         return view('dashboard-admin.TambahGuru');
     }
+
     public function store(Request $request){
         $fields = $request->validate([
             'name' => 'required|string|max:20',
@@ -41,6 +42,8 @@ class TambahGuruController extends Controller
 
         ]);
 
-        return ('berhasil');
+        return redirect('/list-guru')->with('success', 'Berhasil menambahkan');
     }
+
+
 }

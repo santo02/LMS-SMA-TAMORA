@@ -29,7 +29,7 @@ Route::post('/login-proses', [LoginController::class, 'authentikasi'])->name('lo
 
 
 Route::middleware(['auth', "userAccess:student,teacher,admin"])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 
 });
@@ -47,8 +47,15 @@ Route::middleware(['auth', "userAccess:teacher"])->group(function () {
 });
 
 Route::middleware(['auth', "userAccess:admin"])->group(function () {
+
+
     Route::get('/list-siswa', [AdminController::class, 'listsiswa'])->name('list-siswa');
+    Route::get('/delete-siswa/{id}', [AdminController::class, 'deletesiswa'])->name('delete-siswa');
+
     Route::get('/list-guru', [AdminController::class, 'listguru'])->name('list-guru');
+    Route::get('/delete-guru/{id}', [AdminController::class, 'deleteguru'])->name('delete-guru');
+
+
     Route::get('/Tambah-siswa', [TambahSiswaController::class, 'index'])->name('addSiswa');
     Route::get('/Tambah-guru', [TambahGuruController::class, 'index'])->name('addGuru');
     Route::post('/Tambah-guru-proses', [TambahGuruController::class, 'store'])->name('addGuruProses');

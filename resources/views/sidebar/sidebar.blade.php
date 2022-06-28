@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/dashboard.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/list-style.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"/>
-        {{-- <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"> --}}
+        <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
         <link rel ="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
     </head>
     <body>
@@ -30,7 +30,7 @@
                         <img src="logo-sidebar.png" alt="" />
                     </div>
                     <li class="item">
-                        <a href="#" class="menu-btn">
+                        <a href="{{Route('dashboard')}}" class="menu-btn">
                             <i class="fas fa-home"></i><span>Dashboard</span>
                         </a>
                     </li>
@@ -99,21 +99,21 @@
 
         </div>
         <script src ="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src ="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src ="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+        <script src ="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src ="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#example').DataTable();
-});
-</script>
         <script type="text/javascript">
             $(document).ready(function () {
-                $(".sidebar-btn").click(function () {
-                    $(".wrapper").toggleClass("collapse");
-                });
-            });
-        </script>
+                $('#example').DataTable();
+    });
+ </script>
+           {{-- // <script type="text/javascript">
+    //             $(document).ready(function () {
+    //                 $(".sidebar-btn").click(function () {
+    //                     $(".wrapper").toggleClass("collapse");
+    //                 });
+    //             });
+    //         </script> --}}
     </body>
 </html>
