@@ -104,19 +104,20 @@
                                     <div class="modal-body">
                                         <form action="{{ Route('edit-course', $course->id) }}" method="POST"
                                             enctype="multipart/form-data">
+                                            @csrf
                                             <div class="mb-3">
                                                 <label class="form-label required">Judul</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" name="title"
                                                     value="{{ $course->title }}" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label required">Thumbnail</label>
-                                                <input type="file" class="form-control"
-                                                    value="{{ Storage::url($course->thumbnail) }}" />
+                                                <input type="file" class="form-control" name="thumbnail"
+                                                    value="{{ asset('thumbnail/'.$course->thumbnail) }}" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label required">Jurusan</label>
-                                                <select class="form-select" aria-label="Default select example">
+                                                <select class="form-select" aria-label="Default select example" name="jurusan">
                                                     <option selected>pilih jurusan</option>
                                                     <option value="1">MIA</option>
                                                     <option value="2">IIS</option>
@@ -124,12 +125,12 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label required">Deskripsi</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" name="desk"
                                                     value="{{ $course->deskripsi }}" />
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label required">Enroll Key</label>
-                                                <input type="text" class="form-control"
+                                                <input type="text" class="form-control" name="key"
                                                     value="{{ $course->enroll_key }}" />
                                             </div>
                                             <div class="modal-footer">

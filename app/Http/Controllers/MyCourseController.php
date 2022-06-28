@@ -12,14 +12,16 @@ use Illuminate\Support\Facades\Redirect;
 
 class MyCourseController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $users_id = Auth::User()->id;
         $Students_id = Teachers::where('user_id', $users_id)->first()->id;
         $course = DB::table('courses')->where('theachers_id', $Students_id)->get();
 
-        return view('dashboard-guru.mycourse', ['courses'=> $course]);
+        return view('dashboard-guru.mycourse', ['courses' => $course]);
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $fields = $request->validate([
             'title' => 'required|string|max:20',
@@ -32,44 +34,62 @@ class MyCourseController extends Controller
         $users_id = Auth::User()->id;
         $theachers_id = Teachers::where('user_id', $users_id)->first()->id;
         $fileName = '';
-        if($file = $request->hasFile('thumbnail')) {
+        if ($file = $request->hasFile('thumbnail')) {
 
-            $file = $request->file('thumbnail') ;
-            $fileName = $file->getClientOriginalName() ;
-            $destinationPath = public_path().'/thumbnail' ;
-            $file->move($destinationPath,$fileName);
+            $file = $request->file('thumbnail');
+            $fileName = $file->getClientOriginalName();
+            $destinationPath = public_path() . '/thumbnail';
+            $file->move($destinationPath, $fileName);
+        }
+
+        // $thumbnail = $request->file('thumbnail')->store('public/thumbnail');
+        Courses::create([
+            'title' => $fields['title'],
+            'thumbnail' => $fileName,
+            'jurusan' => $fields['jurusan'],
+            'deskripsi' => $fields['desk'],
+            'enroll_key' => $fields['key'],
+            'theachers_id' => $theachers_id
+        ]);
+
+        return redirect()->route('mycourse')->with('succes', 'Berhasil menambahkan course');
     }
-
-            // $thumbnail = $request->file('thumbnail')->store('public/thumbnail');
-            Courses::create([
-                'title' => $fields['title'],
-                'thumbnail' => $fileName,
-                'jurusan' => $fields['jurusan'],
-                'deskripsi' => $fields['desk'],
-                'enroll_key' => $fields['key'],
-                'theachers_id' => $theachers_id
-            ]);
-
-            return redirect()->route('mycourse')->with('succes', 'Berhasil menambahkan course');
-    }
-    public function delete($id){
+    public function delete($id)
+    {
         Courses::destroy($id);
         return redirect()->route('mycourse')->with('success', 'Berhasil Dihapus');
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
+        // $request->validate([
+        //     'title' => 'required|string|max:20',
+        //     'thumbnail' => 'required',
+        //     'thumbnail.*' => 'image|mimes:jpg,jpeg,png|max:20000',
+        //     'jurusan' => 'required|string',
+        //     'desk' => 'required|string',
+        //     'key' => 'string'
+        // ]);
         $course = Courses::find($id);
-
         $course->title = $request->title;
-        $course->thumbnail = $request->thumbnail;
+        $fileName = '';
+        if ($file = $request->hasFile('thumbnail')) {
+
+            $file = $request->file('thumbnail');
+            $fileName = $file->getClientOriginalName();
+            $destinationPath = public_path() . '/thumbnail';
+            $file->move($destinationPath, $fileName);
+            $course->thumbnail = $fileName;
+        }
+
         $course->jurusan = $request->jurusan;
-        $course->deskripsi = $request->deskripsi;
-        $course->enroll_key = $request->enroll_key;
+        $course->deskripsi = $request->desk;
+        $course->enroll_key = $request->key;
 
         $course->save();
 
-        return('test');
+        return redirect()->route('mycourse')->with('success', 'Berhasil update');
         // return redirect()->route('mycourse')->with('success','updated Berhasil');
 
     }
