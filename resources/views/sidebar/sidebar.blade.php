@@ -7,6 +7,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/sidebar.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/dashboard.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/list-style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/course.css') }}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"/>
         <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
         <link rel ="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
@@ -50,12 +51,12 @@
                         </div>
                     </li>
                     @elseif(Auth::user()->role == 'teacher')
-                    <li class="item" id="profile">
-                        <a href="#profile" class="menu-btn">
+                    <li class="item">
+                        <a href="{{Route('mycourse')}}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>My Course
                         </a>
                     </li>
-                    <li class="item" id="profile">
+                    <li class="item" >
                         <a href="#profile" class="menu-btn">
                             <i class="fas fa-user-plus"></i>Profile
                         </a>
@@ -101,7 +102,11 @@
         <script src ="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src ="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
         <script src ="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-
+        <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"
+      ></script>
 
         <script type="text/javascript">
             $(document).ready(function () {

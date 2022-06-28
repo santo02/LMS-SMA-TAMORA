@@ -1,0 +1,28 @@
+.img-course{
+    height: 120px;
+}
+.title-course{
+    padding: 10px 20px;
+    border-bottom: 2px solid black;
+ }
+ .course-action{
+    padding: 5px;
+    margin-right: 0px;
+    margin-left: auto;
+    cursor: pointer;
+ }
+ .action-item{
+    padding: 10px;
+ }
+ .btn-add-custom{
+    margin-top: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 100px;
+    padding: 7px 10px;
+    cursor: pointer;
+    background-color: #FD7E14;
+    color: white;
+    font-weight: 400;
+  }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MyCourseController;
 use App\Http\Controllers\TambahGuruController;
 use App\Http\Controllers\TambahSiswaController;
 use Illuminate\Support\Facades\Auth;
@@ -41,14 +42,15 @@ Route::middleware(['auth', "userAccess:student"])->group(function () {
 });
 
 Route::middleware(['auth', "userAccess:teacher"])->group(function () {
-    Route::get('/teacher', function () {
-        return "teacher";
-    });
+    Route::get('/my-course', [MyCourseController::class, 'index'])->name('mycourse');
+    Route::post('/add-course', [MyCourseController::class, 'store'])->name('add-course');
+
+    Route::get('/delete-course/{id}', [MyCourseController::class, 'delete'])->name('delete-course');
+    Route::post('/edit-course/{id}', [MyCourseController::class, 'update'])->name('edit-course');
+
 });
 
 Route::middleware(['auth', "userAccess:admin"])->group(function () {
-
-
     Route::get('/list-siswa', [AdminController::class, 'listsiswa'])->name('list-siswa');
     Route::get('/delete-siswa/{id}', [AdminController::class, 'deletesiswa'])->name('delete-siswa');
 
