@@ -56,8 +56,7 @@
         @foreach ($courses as $course)
             <div class="col">
                 <div class="card">
-
-                    <img src="{{ Storage::url($course->thumbnail) }}" class="card-img-top img-course" alt="..." />
+                    <img src="{{ asset('thumbnail/'.$course->thumbnail) }}" class="card-img-top img-course" alt="..." />
                     <div class="card-body">
                         <h5 class="card-title">{{ $course->title }}</h5>
                         <p class="card-text">

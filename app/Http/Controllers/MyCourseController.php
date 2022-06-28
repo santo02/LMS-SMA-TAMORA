@@ -31,11 +31,19 @@ class MyCourseController extends Controller
         ]);
         $users_id = Auth::User()->id;
         $theachers_id = Teachers::where('user_id', $users_id)->first()->id;
+        $fileName = '';
+        if($file = $request->hasFile('thumbnail')) {
 
-            $thumbnail = $request->file('thumbnail')->store('public/thumbnail');
+            $file = $request->file('thumbnail') ;
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/thumbnail' ;
+            $file->move($destinationPath,$fileName);
+    }
+
+            // $thumbnail = $request->file('thumbnail')->store('public/thumbnail');
             Courses::create([
                 'title' => $fields['title'],
-                'thumbnail' => $thumbnail,
+                'thumbnail' => $fileName,
                 'jurusan' => $fields['jurusan'],
                 'deskripsi' => $fields['desk'],
                 'enroll_key' => $fields['key'],

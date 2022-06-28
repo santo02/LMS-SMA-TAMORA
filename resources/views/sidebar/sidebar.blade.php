@@ -5,9 +5,9 @@
         <title>LMS</title>
         <link rel="stylesheet" href="sidebar.css" />
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/sidebar.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('/css/dashboard.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/list-style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/css/course.css') }}">
+        @yield('css')
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"/>
         <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
         <link rel ="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
@@ -96,6 +96,7 @@
             <!--contoh main-->
             <div class="main-container">
                 @yield('content')
+
             </div>
 
         </div>
@@ -105,20 +106,19 @@
         <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"
-      ></script>
+        crossorigin="anonymous"></script>
 
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#example').DataTable();
-    });
- </script>
-           {{-- // <script type="text/javascript">
-    //             $(document).ready(function () {
-    //                 $(".sidebar-btn").click(function () {
-    //                     $(".wrapper").toggleClass("collapse");
-    //                 });
-    //             });
-    //         </script> --}}
+             });
+        </script>
+        {{-- <script type="text/javascript">
+                 $(document).ready(function () {
+                $(".sidebar-btn").click(function () {
+                    $(".wrapper").toggleClass("collapse");
+                });
+            });
+    </script> --}}
     </body>
 </html>

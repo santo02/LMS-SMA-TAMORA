@@ -1,4 +1,7 @@
 @extends('sidebar.sidebar')
+@section('css')
+<link rel="stylesheet" type="text/css" href="{{ asset('/css/dashboard.css') }}">
+@endsection
 @section('content')
     <h1 class="title">Dashboard</h1>
     <div class="dashInfo">
