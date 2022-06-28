@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\moduletugasController;
 use App\Http\Controllers\MyCourseController;
 use App\Http\Controllers\TambahGuruController;
 use App\Http\Controllers\TambahSiswaController;
@@ -36,14 +38,15 @@ Route::middleware(['auth', "userAccess:student,teacher,admin"])->group(function 
 });
 
 Route::middleware(['auth', "userAccess:student"])->group(function () {
-    Route::get('/student', function () {
-        return "student";
-    });
+    Route::get('/course', [CourseController::class, 'index'])->name('course');
 });
 
 Route::middleware(['auth', "userAccess:teacher"])->group(function () {
     Route::get('/my-course', [MyCourseController::class, 'index'])->name('mycourse');
     Route::post('/add-course', [MyCourseController::class, 'store'])->name('add-course');
+
+    Route::get('/moduletugas', [moduletugasController::class, 'index'])->name('moduletugas');
+
 
     Route::get('/delete-course/{id}', [MyCourseController::class, 'delete'])->name('delete-course');
     Route::post('/edit-course/{id}', [MyCourseController::class, 'update'])->name('edit-course');
