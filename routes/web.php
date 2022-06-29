@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\moduletugasController;
 use App\Http\Controllers\MyCourseController;
+use App\Http\Controllers\MycourseSiswaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TambahGuruController;
 use App\Http\Controllers\TambahMateriController;
@@ -49,6 +50,7 @@ Route::middleware(['auth', "userAccess:student,teacher"])->group(function () {
 
 Route::middleware(['auth', "userAccess:student"])->group(function () {
     Route::get('/course', [CourseController::class, 'index'])->name('course');
+    Route::get('/mycourse', [MycourseSiswaController::class, 'index'])->name('siswacourse');
 });
 
 Route::middleware(['auth', "userAccess:teacher"])->group(function () {

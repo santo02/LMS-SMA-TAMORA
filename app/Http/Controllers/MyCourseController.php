@@ -67,15 +67,6 @@ class MyCourseController extends Controller
 
     public function update(Request $request)
     {
-
-        // $request->validate([
-        //     'title' => 'required|string|max:20',
-        //     'thumbnail' => 'required',
-        //     'thumbnail.*' => 'image|mimes:jpg,jpeg,png|max:20000',
-        //     'jurusan' => 'required|string',
-        //     'desk' => 'required|string',
-        //     'key' => 'string'
-        // ]);
         $id = $request->id_course;
         $course = Courses::find($id);
         $course->title = $request->title;

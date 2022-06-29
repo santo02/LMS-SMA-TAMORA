@@ -43,7 +43,7 @@ Layout .row .col:last-child {
   box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
 }
 .tab {
-  width: 70%;
+  width: 400px;
   color: #17A2B8;
   overflow: hidden;
 }

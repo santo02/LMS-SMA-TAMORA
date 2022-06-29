@@ -11,19 +11,18 @@ class ProfileController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-    $role = DB::table('users')->where('id', $id)->select('role')->get();
-    if($role[0]->role == 'teacher'){
-        return 'test';
-    }
-    elseif($role[0]->role == 'student'){
-        $user =   DB::table('users')->join('students', 'students.user_id', '=', 'users.id')
-            ->where('users.id', $id)
-            ->select('users.name', 'users.email', 'users.password','students.nis', 'students.phone', 'students.address')
-            ->get();
-    }
-
-
-
+        $role = DB::table('users')->where('id', $id)->select('role')->get();
+        if ($role[0]->role == 'teacher') {
+            $user =   DB::table('users')->join('teacher', 'teacher.user_id', '=', 'users.id')
+                ->where('users.id', $id)
+                ->select('users.name', 'users.email', 'users.password', 'teacher.nis', 'teacher.phone', 'students.address')
+                ->get();
+        } elseif ($role[0]->role == 'student') {
+            $user =   DB::table('users')->join('students', 'students.user_id', '=', 'users.id')
+                ->where('users.id', $id)
+                ->select('users.name', 'users.email', 'users.password', 'students.nis', 'students.phone', 'students.address')
+                ->get();
+        }
         return view('editprofile', ["users" => $user, "role" => $role[0]]);
     }
 }

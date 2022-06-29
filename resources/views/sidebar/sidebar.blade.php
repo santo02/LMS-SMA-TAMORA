@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     <li class="item" id="profile">
-                        <a href="#profile" class="menu-btn">
+                        <a href="{{Route('siswacourse')}}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>My Course
                         </a>
                     </li>
