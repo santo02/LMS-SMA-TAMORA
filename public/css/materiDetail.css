@@ -38,14 +38,19 @@
     margin-left: 20px;
   }
   .set-item{
-    margin-right: 0px;
-    margin-left: auto;
-    padding-right: 80px;
+    /* margin-right: 0px; */
+    margin-right: 10px;
+    /* padding-right: 80px; */
     cursor: pointer;
-    padding-top: 10px;
+    text-decoration:none;
+    padding: 10px;
   }
   .submission{
     margin-left: 20px;
     margin-top: 30px;
     width: 80%;
+  }
+  .action{
+    margin-left: auto;
+    padding: 10px;
   }

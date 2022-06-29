@@ -18,4 +18,13 @@
             </div>
         </div>
     </div>
+    @section('js')
+    {{-- <script type="text/javascript">
+             $(document).ready(function () {
+            $(".sidebar-btn").click(function () {
+                $(".wrapper").toggleClass("collapse");
+            });
+        });
+</script> --}}
+@endsection
 @endsection

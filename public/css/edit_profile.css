@@ -1,0 +1,31 @@
+.btn-simpan{
+    margin-top: 10px;
+    margin-left: 80%;
+    border-radius: 10px;
+    border: none;
+    width: 100px;
+    padding: 7px 10px;
+    cursor: pointer;
+    background-color: #FD7E14;
+    color: white;
+    font-weight: 400;
+  }
+.caption2{
+    color: rgb(31, 144, 219);
+}
+.caption{
+    padding: 10px 20px;
+    font-size: 30px;
+    border-bottom: 2px solid black;
+ }
+ .photo{
+    width: 15%;
+ }
+ /* .edit{
+    background-color:#17A2B8;
+    width: 50px;
+    height: 50px;
+    margin-left: 55%;
+    color: white;
+    margin-right: 10px;
+ } */

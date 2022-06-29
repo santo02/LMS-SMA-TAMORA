@@ -26,6 +26,9 @@ class EnrollmenController extends Controller
                 'course_id' => $idc]);
             return back()->with('success', 'Berhasil ditambahkan');
         }
+        else{
+            return back()->with('gagal', 'Gagal Menambahkan!');
+        }
 
     }
 }

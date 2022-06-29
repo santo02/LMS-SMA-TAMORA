@@ -9,19 +9,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class TambahMateriController extends Controller
+class MateriController extends Controller
 {
-    public function index($id){
+    public function index($id, $week){
 
 
-        return view('dashboard-guru.Tambahmateri', ['id' => $id]);
+        return view('dashboard-guru.Tambahmateri', ['id' => $id, 'week' => $week]);
 
     }
-    public function show($id){
+    public function show($id, $week){
         $module = DB::table('modules')
         ->join('courses', 'modules.course_id', '=', 'courses.id')
         ->join('teachers', 'teachers.id', '=', 'modules.theachers_id')
         ->join('users', 'users.id', '=', 'teachers.user_id')
+        ->where('courses.id', '=', $id)
+        ->where('modules.week', '=', $week)
         ->select('modules.*', 'users.name')
         ->get();
 
@@ -36,20 +38,20 @@ class TambahMateriController extends Controller
             'sesion' => 'required|string',
             'sesison_date' => 'required|date|date_format:Y-m-d',
             'file' => 'required',
-            'file.*' => 'image|mimes:jpg,jpeg,png,docx,pdf,pptx|max:2000'
+            'file.*' => 'mimes:pdf,docx,doc,zip'|'max:2048',
         ]);
         $users_id = Auth::User()->id;
         $theachers_id = Teachers::where('user_id', $users_id)->first()->id;
         $course_id = $id;
 
         $fileName = '';
-        if ($file = $request->hasFile('materi')) {
+        if ($file = $request->hasFile('file')) {
 
-            $file = $request->file('materi');
+            $file = $request->file('file');
             $fileName = $file->getClientOriginalName();
             $destinationPath = public_path() . '/materi';
             $file->move($destinationPath, $fileName);
-        }
+
 
             Modules::create([
                 'course_id' => $course_id,
@@ -62,6 +64,14 @@ class TambahMateriController extends Controller
                 'theachers_id' => $theachers_id,
                 'file' => $fileName
             ]);
-            return ('berhasil');
+            return back()->with('success', 'Berhasil Ditambahkan!');
+        }
+            return back()->with('gagal', 'Gagal Ditambahkan!');
+    }
+    public function Delete($id){
+
+        DB::table('Modules')->where('module_id', $id)->delete();
+
+        return back()->with('success', 'Berhasil Dihapus!');
     }
 }

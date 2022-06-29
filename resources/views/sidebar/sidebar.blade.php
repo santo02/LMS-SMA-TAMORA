@@ -53,15 +53,14 @@
                         <a href="{{ Route('mycourse') }}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>My Course
                         </a>
-                    </li>
-                    <li class="item">
-                        <a href="#profile" class="menu-btn">
-                            <i class="fas fa-user-plus"></i>Profile
+                    </li><li class="item" id="profile">
+                        <a href="{{Route('cs')}}" class="menu-btn">
+                            <i class="fas fa-phone    "></i> Customer Service
                         </a>
                     </li>
                     <li class="item" id="profile">
-                        <a href="#profile" class="menu-btn">
-                            <i class="fas fa-user-plus"></i>Customer Service
+                        <a href="{{ Route('profile') }}" class="menu-btn">
+                            <i class="fas fa-user-plus"></i>Profile
                         </a>
                     </li>
                 @else
@@ -76,13 +75,13 @@
                         </a>
                     </li>
                     <li class="item" id="profile">
-                        <a href="#profile" class="menu-btn">
+                        <a href="{{ Route('profile') }}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>Profile
                         </a>
                     </li>
                     <li class="item" id="profile">
-                        <a href="#profile" class="menu-btn">
-                            <i class="fas fa-user-plus"></i>Customer Service
+                        <a href="{{Route('cs')}}" class="menu-btn">
+                            <i class="fas fa-phone"></i> Customer Service
                         </a>
                     </li>
                 @endif
@@ -114,13 +113,7 @@
             $('#example').DataTable();
         });
     </script>
-    {{-- <script type="text/javascript">
-                 $(document).ready(function () {
-                $(".sidebar-btn").click(function () {
-                    $(".wrapper").toggleClass("collapse");
-                });
-            });
-    </script> --}}
+{{-- @yield('js') --}}
 </body>
 
 </html>

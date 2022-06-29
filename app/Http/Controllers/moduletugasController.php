@@ -18,14 +18,19 @@ class moduletugasController extends Controller
         ->join('my_courses', 'courses.id', '=', 'my_courses.course_id')
         ->join('students', 'students.id', '=', 'my_courses.student_id')
         ->join('users', 'users.id', '=', 'students.user_id')
+        ->where('courses.id', '=', $id)
         ->select('students.NIS', 'users.name')
         ->get();
 
+
         $module = DB::table('modules')
+        ->select('modules.*')
         ->join('courses', 'modules.course_id', '=', 'courses.id')
         ->join('teachers', 'teachers.id', '=', 'modules.theachers_id')
         ->join('users', 'users.id', '=', 'teachers.user_id')
-        ->select('modules.*', 'users.name')
+        ->where('courses.id', '=', $id)
+        // ->select('modules.*', 'users.name')
+        // ->groupBy('modules.week')
         ->get();
 
         $course = Courses::where('id', $id)->select('id')->get();
@@ -35,5 +40,6 @@ class moduletugasController extends Controller
     }
     public function reset()
     {
+
     }
 }

@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CScontroller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EnrollmenController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MateriController;
 use App\Http\Controllers\moduletugasController;
 use App\Http\Controllers\MyCourseController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TambahGuruController;
 use App\Http\Controllers\TambahMateriController;
 use App\Http\Controllers\TambahSiswaController;
@@ -38,6 +41,11 @@ Route::middleware(['auth', "userAccess:student,teacher,admin"])->group(function 
     Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
 
 });
+Route::middleware(['auth', "userAccess:student,teacher"])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/cs', [CScontroller::class, 'index'])->name('cs');
+
+});
 
 Route::middleware(['auth', "userAccess:student"])->group(function () {
     Route::get('/course', [CourseController::class, 'index'])->name('course');
@@ -47,9 +55,10 @@ Route::middleware(['auth', "userAccess:teacher"])->group(function () {
     Route::get('/my-course', [MyCourseController::class, 'index'])->name('mycourse');
     Route::post('/add-course', [MyCourseController::class, 'store'])->name('add-course');
 
-    Route::get('/add-materi/{id}', [TambahMateriController::class, 'index'])->name('add-materi');
-    Route::post('/add-materi-proses/{id}', [TambahMateriController::class, 'store'])->name('add-materi-proses');
-    Route::get('/materi/{id}', [TambahMateriController::class, 'show'])->name('materi');
+    Route::get('/add-materi/{id}/{week}', [MateriController::class, 'index'])->name('add-materi');
+    Route::post('/add-materi-proses/{id}', [MateriController::class, 'store'])->name('add-materi-proses');
+    Route::get('/materi/{id}/{week}', [MateriController::class, 'show'])->name('materi');
+    Route::get('/delete-materi/{id}', [MateriController::class, 'delete'])->name('delete-materi');
 
     Route::get('/moduletugas/{id}', [moduletugasController::class, 'index'])->name('moduletugas');
     Route::post('/enroll', [EnrollmenController::class, 'store'])->name('enroll');
