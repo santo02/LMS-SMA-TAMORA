@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Courses;
+use App\Models\MyCourse;
 use App\Models\Students;
 use App\Models\Teachers;
 use Illuminate\Http\Request;
@@ -28,6 +29,7 @@ class MyCourseController extends Controller
             'thumbnail' => 'required',
             'thumbnail.*' => 'image|mimes:jpg,jpeg,png|max:20000',
             'jurusan' => 'required|string',
+            'minggu' => 'required|string',
             'desk' => 'required|string',
             'key' => 'string'
         ]);
@@ -48,6 +50,8 @@ class MyCourseController extends Controller
             'thumbnail' => $fileName,
             'jurusan' => $fields['jurusan'],
             'deskripsi' => $fields['desk'],
+            'minggu' => $fields['minggu'],
+
             'enroll_key' => $fields['key'],
             'theachers_id' => $theachers_id
         ]);
@@ -56,11 +60,12 @@ class MyCourseController extends Controller
     }
     public function delete($id)
     {
+        MyCourse::where('course_id', $id)->delete();
         Courses::destroy($id);
         return redirect()->route('mycourse')->with('success', 'Berhasil Dihapus');
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
 
         // $request->validate([
@@ -71,11 +76,12 @@ class MyCourseController extends Controller
         //     'desk' => 'required|string',
         //     'key' => 'string'
         // ]);
+        $id = $request->id_course;
         $course = Courses::find($id);
         $course->title = $request->title;
+
         $fileName = '';
         if ($file = $request->hasFile('thumbnail')) {
-
             $file = $request->file('thumbnail');
             $fileName = $file->getClientOriginalName();
             $destinationPath = public_path() . '/thumbnail';
@@ -83,14 +89,11 @@ class MyCourseController extends Controller
             $course->thumbnail = $fileName;
         }
 
+        $course->minggu = $request->minggu;
         $course->jurusan = $request->jurusan;
         $course->deskripsi = $request->desk;
         $course->enroll_key = $request->key;
-
         $course->save();
-
         return redirect()->route('mycourse')->with('success', 'Berhasil update');
-        // return redirect()->route('mycourse')->with('success','updated Berhasil');
-
     }
 }

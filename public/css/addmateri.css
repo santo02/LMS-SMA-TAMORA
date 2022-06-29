@@ -1,0 +1,28 @@
+.box-content{
+  margin: 10px;
+  width: 50%;
+  border: 1px solid rgb(230, 230, 233);
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.form-field{
+    padding: 50px;
+    margin: 10px;
+    
+}
+.btn-add-custom{
+    margin-top: 10px;
+    border-radius: 10px;
+    border: none;
+    width: 100px;
+    padding: 7px 10px;
+    cursor: pointer;
+    background-color: #FD7E14;
+    color: white;
+    font-weight: 400;
+  }
+  .caption{
+    padding: 10px 20px;
+    font-size: 30px;
+    border-bottom: 2px solid black;
+ }

@@ -3,10 +3,12 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EnrollmenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\moduletugasController;
 use App\Http\Controllers\MyCourseController;
 use App\Http\Controllers\TambahGuruController;
+use App\Http\Controllers\TambahMateriController;
 use App\Http\Controllers\TambahSiswaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -45,11 +47,16 @@ Route::middleware(['auth', "userAccess:teacher"])->group(function () {
     Route::get('/my-course', [MyCourseController::class, 'index'])->name('mycourse');
     Route::post('/add-course', [MyCourseController::class, 'store'])->name('add-course');
 
-    Route::get('/moduletugas', [moduletugasController::class, 'index'])->name('moduletugas');
+    Route::get('/add-materi/{id}', [TambahMateriController::class, 'index'])->name('add-materi');
+    Route::post('/add-materi-proses/{id}', [TambahMateriController::class, 'store'])->name('add-materi-proses');
+    Route::get('/materi/{id}', [TambahMateriController::class, 'show'])->name('materi');
+
+    Route::get('/moduletugas/{id}', [moduletugasController::class, 'index'])->name('moduletugas');
+    Route::post('/enroll', [EnrollmenController::class, 'store'])->name('enroll');
 
 
     Route::get('/delete-course/{id}', [MyCourseController::class, 'delete'])->name('delete-course');
-    Route::post('/edit-course/{id}', [MyCourseController::class, 'update'])->name('edit-course');
+    Route::post('/edit-course', [MyCourseController::class, 'update'])->name('edit-course');
 
 });
 

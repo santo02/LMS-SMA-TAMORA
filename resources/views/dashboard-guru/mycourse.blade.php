@@ -7,7 +7,7 @@
                 +Add New
             </button>
         </a>
-        <div class="modal" id="exampleModalAdd">
+        <div class="modal" id="exampleModalAdd" >
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -38,6 +38,15 @@
                                 <textarea type="text" name="desk" class="form-control"></textarea>
                             </div>
                             <div class="mb-3">
+                                <label class="form-label required">Minggu Ke-</label>
+                                <select class="form-select" name="minggu" aria-label="Default select example">
+                                    <option selected>Minggu ke-</option>
+                                        @for ($i = 1; $i < 17; $i++)
+                                         <option value="{{$i}}">{{$i}}</option>
+                                        @endfor
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label required">Enroll Key</label>
                                 <input type="text" name="key" class="form-control" />
                             </div>
@@ -52,18 +61,19 @@
             </div>
         </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="row row-cols-1 row-cols-md-2 shadow p-3  rounded m-4">
         @foreach ($courses as $course)
             <div class="col">
                 <div class="card">
                     <img src="{{ asset('thumbnail/'.$course->thumbnail) }}" class="card-img-top img-course" alt="..." />
-                    <div class="card-body">
-                        <a href="{{Route('moduletugas')}}"><h5 class="card-title">{{ $course->title }}</h5></a>
+                    <div class="card-body mt-">
+                        <hr>
+                        <a href="moduletugas/{{$course->id}}"><h5 class="card-title">{{ $course->title }}</h5></a>
                         <p class="card-text">
                             {{ $course->deskripsi }}
                         </p>
                     </div>
-                    <div class="course-action">
+                    <div class="course-action mt--4">
                         <li class="fas fa-trash-alt action-item" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             style="font-size: 20px; color: red"></li>
                         <!-- Modal -->
@@ -87,14 +97,13 @@
                                         </button>
                                         <a href="/delete-course/{{ $course->id }}"><button type="button"
                                                 class="btn btn-primary">Yes</button></a>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <i class="fas fa-edit action-item" style="font-size: 20px; color: blue" data-bs-toggle="modal"
-                            data-bs-target="#myModal"></i>
-                        <div class="modal" id="myModal">
+                            data-bs-target="#myModal{{$course->id}}"></i>
+                        <div class="modal" id="myModal{{$course->id}}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -102,9 +111,10 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ Route('edit-course', $course->id) }}" method="POST"
+                                        <form action="{{ Route('edit-course') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
+                                            <input type="hidden" name="id_course" value="{{$course->id}}"/>
                                             <div class="mb-3">
                                                 <label class="form-label required">Judul</label>
                                                 <input type="text" class="form-control" name="title"
@@ -118,15 +128,24 @@
                                             <div class="mb-3">
                                                 <label class="form-label required">Jurusan</label>
                                                 <select class="form-select" aria-label="Default select example" name="jurusan">
-                                                    <option selected>pilih jurusan</option>
-                                                    <option value="1">MIA</option>
-                                                    <option value="2">IIS</option>
+                                                    <option >pilih jurusan</option>
+                                                    <option value="1"  @if($course->minggu == 1) selected @endif>MIA</option>
+                                                    <option value="2"  @if($course->minggu == 2) selected @endif>IIS</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label required">Deskripsi</label>
                                                 <input type="text" class="form-control" name="desk"
                                                     value="{{ $course->deskripsi }}" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label required">Minggu Ke-</label>
+                                                <select class="form-select" name="minggu" aria-label="Default select example">
+                                                    <option>Minggu Ke-</option>
+                                                        @for ($i = 1; $i < 17; $i++)
+                                                         <option value="{{$i}}" @if($course->minggu == $i) selected @endif>{{$i}}</option>
+                                                        @endfor
+                                                </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label required">Enroll Key</label>
