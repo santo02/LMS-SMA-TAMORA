@@ -17,8 +17,12 @@ return new class extends Migration
             $table->id('id');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('NIS')->unique();
+            $table->string('name');
             $table->string('phone');
+            $table->string('gender');
+            $table->string('birth_date');
             $table->string('address');
+            $table->string('foto');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

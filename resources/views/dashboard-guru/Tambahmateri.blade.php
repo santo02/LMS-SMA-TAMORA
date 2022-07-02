@@ -3,7 +3,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/addmateri.css') }}">
 @endsection
 @section('content')
-    <h1 class="caption">Create Materi Fisika 6</h1>
+    <h1 class="caption">Create Materi</h1>
     @if (session()->has('success'))
         <div class="alert alert-success" role="alert">
             <p class="m-2">

@@ -19,11 +19,11 @@
     </div>
     <div class="head">
         <h4 class="text-white">LMS SMAN 1 TANJUNG MORAWA</h4>
-        <p class="mt-5">
+        {{-- <p class="mt-5">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse aliquam nunc non enim ultricies
             pretium.
         </p>
-        <button class="btn text-uppercase text-white more mt-3">More</button>
+        <button class="btn text-uppercase text-white more mt-3">More</button> --}}
     </div>
     <div class=" img-responsive">
         <img src="image/gambar1.png" class="gambar">

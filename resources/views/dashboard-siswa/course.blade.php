@@ -10,7 +10,7 @@
         <div class="card">
             <img src="{{ asset('thumbnail/'.$course->thumbnail) }}" class="card-img-top img-course" alt="..." />
             <div class="card-body">
-                <h5 class="card-title">{{ $course->title }}</h5>
+                <a href="/detailcourse/{{$course->id}}"><h5 class="card-title">{{ $course->title }}</h5></a>
                 <p class="card-text">
                     {{ $course->deskripsi }}
                 </p>

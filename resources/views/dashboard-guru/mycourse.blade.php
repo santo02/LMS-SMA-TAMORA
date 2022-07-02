@@ -37,7 +37,7 @@
                                 <label class="form-label required">Deskripsi</label>
                                 <textarea type="text" name="desk" class="form-control"></textarea>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3" style="display:none">
                                 <label class="form-label required">Minggu Ke-</label>
                                 <select class="form-select" name="minggu" aria-label="Default select example">
                                     <option selected>Minggu ke-</option>
@@ -68,6 +68,7 @@
                     <img src="{{ asset('thumbnail/'.$course->thumbnail) }}" class="card-img-top img-course" alt="..." />
                     <div class="card-body mt-">
                         <hr>
+
                         <a href="moduletugas/{{$course->id}}"><h5 class="card-title">{{ $course->title }}</h5></a>
                         <p class="card-text">
                             {{ $course->deskripsi }}
@@ -138,7 +139,7 @@
                                                 <input type="text" class="form-control" name="desk"
                                                     value="{{ $course->deskripsi }}" />
                                             </div>
-                                            <div class="mb-3">
+                                            <div class="mb-3" style="display:none">
                                                 <label class="form-label required">Minggu Ke-</label>
                                                 <select class="form-select" name="minggu" aria-label="Default select example">
                                                     <option>Minggu Ke-</option>

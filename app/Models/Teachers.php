@@ -10,7 +10,11 @@ class Teachers extends Model
     protected $fillable = [
         'user_id',
         'NIP',
+        'name',
         'phone',
+        'gender',
+        'birth_date',
         'address',
+        'foto',
     ];
 }

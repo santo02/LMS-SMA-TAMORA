@@ -12,7 +12,7 @@ class AdminController extends Controller
     public function listsiswa(){
         $students = DB::table('students')
         ->join('users', 'user_id', '=', 'users.id')
-        ->select('users.name','users.email', 'students.NIS', 'students.phone', 'students.address', 'students.user_id')
+        ->select('users.email','users.status', 'students.*')
         ->get();
 
         return view('dashboard-admin.list-siswa',['students'=> $students]);
@@ -21,7 +21,7 @@ class AdminController extends Controller
     public function listguru(){
         $teachers = DB::table('teachers')
         ->join('users', 'user_id', '=', 'users.id')
-        ->select('users.name','users.email', 'teachers.NIP', 'teachers.phone', 'teachers.address', 'teachers.user_id')
+        ->select('users.email', 'users.status','teachers.*')
         ->get();
 
         return view('dashboard-admin.list-guru',['teachers'=> $teachers]);

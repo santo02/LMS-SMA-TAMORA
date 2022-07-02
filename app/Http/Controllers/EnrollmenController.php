@@ -21,14 +21,24 @@ class EnrollmenController extends Controller
         // dd($idc);
 
         if ($students && ($fields['name'] == $students_name->name)) {
-            MyCourse::create([
+            MyCourse::firstOrCreate([
                 'student_id' => $students->id,
                 'course_id' => $idc]);
+
             return back()->with('success', 'Berhasil ditambahkan');
         }
         else{
             return back()->with('gagal', 'Gagal Menambahkan!');
         }
 
+    }
+
+    public function reset($id){
+        $data = MyCourse::where('course_id', '=', $id);
+        if (is_null($data)) {
+            return back()->with('gagal_reset', 'Gagal Direset');
+        }
+        MyCourse::where('course_id', '=', $id)->delete();
+        return back()->with('reset', 'Berhasil Direset');
     }
 }

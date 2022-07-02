@@ -4,7 +4,6 @@
 @endsection
 @section('content')
     <div class="CourseContent">
-        <h1 class="title-course">Fisika Dasar 1</h1>
         <h2 class="sub-title">Course Content</h2>
         @if (session()->has('success'))
             <div class="alert alert-success" role="alert">
@@ -17,6 +16,20 @@
             <div class="alert alert-danger" role="alert">
                 <p class="m-2">
                     {{ session('gagal') }}
+                </p>
+            </div>
+        @endif
+        @if (session()->has('reset'))
+            <div class="alert alert-success" role="alert">
+                <p class="m-2">
+                    {{ session('reset') }}
+                </p>
+            </div>
+        @endif
+        @if (session()->has('gagal_reset'))
+            <div class="alert alert-danger" role="alert">
+                <p class="m-2">
+                    {{ session('gagal_reset') }}
                 </p>
             </div>
         @endif
@@ -85,7 +98,10 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <button type="button" class="btn btn-danger">Reset</button>
+                                            @foreach ($course as $co)
+                                                <a href="/reset-course/{{ $co->id }}"><button type="button"
+                                                        class="btn btn-danger">Reset</button></a>
+                                            @endforeach
                                             <button type="button" class=" btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#myModal">
                                                 Enroll Student

@@ -68,9 +68,10 @@ class MateriController extends Controller
         }
             return back()->with('gagal', 'Gagal Ditambahkan!');
     }
+
     public function Delete($id){
 
-        DB::table('Modules')->where('module_id', $id)->delete();
+        DB::table('modules')->where('module_id', $id)->delete();
 
         return back()->with('success', 'Berhasil Dihapus!');
     }
