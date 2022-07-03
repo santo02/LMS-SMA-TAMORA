@@ -12,10 +12,7 @@ use Illuminate\Support\Facades\DB;
 class MateriController extends Controller
 {
     public function index($id, $week){
-
-
         return view('dashboard-guru.Tambahmateri', ['id' => $id, 'week' => $week]);
-
     }
     public function show($id, $week){
         $module = DB::table('modules')

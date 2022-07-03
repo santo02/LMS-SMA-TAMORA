@@ -11,8 +11,6 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $course = DB::table('courses')->get();
-
-        return view('dashboard-siswa.course', ['courses' => $course]);
+        return view('dashboard-admin.course');
     }
 }

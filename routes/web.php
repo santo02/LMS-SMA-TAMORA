@@ -4,10 +4,13 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CScontroller;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DetailKelasController;
 use App\Http\Controllers\EnrollmenController;
 use App\Http\Controllers\ExportUsers;
 use App\Http\Controllers\importSiswaController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MapelController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\ModuleDetailController;
 use App\Http\Controllers\ModuleSiswaController;
@@ -48,17 +51,15 @@ Route::post('/login-proses', [LoginController::class, 'authentikasi'])->name('lo
 Route::middleware(['auth', "userAccess:student,teacher,admin"])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/logout', [LoginController::class, 'Logout'])->name('logout');
-
 });
 Route::middleware(['auth', "userAccess:student,teacher"])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
     Route::get('/cs', [CScontroller::class, 'index'])->name('cs');
-    Route::post('/profile/editprofile/{id}', [Profilecontroller::class, 'update'])->name('updateProfileProses');    Route::post('/profile/editpassword/{id}', [Profilecontroller::class, 'updatePassword'])->name('updatePasswordProses');
-
+    Route::post('/profile/editprofile/{id}', [Profilecontroller::class, 'update'])->name('updateProfileProses');
+    Route::post('/profile/editpassword/{id}', [Profilecontroller::class, 'updatePassword'])->name('updatePasswordProses');
 });
 
 Route::middleware(['auth', "userAccess:student"])->group(function () {
-    Route::get('/course', [CourseController::class, 'index'])->name('course');
     Route::get('/mycourse', [MycourseSiswaController::class, 'index'])->name('siswacourse');
     Route::get('/detailcourse/{id}', [SelfenrollController::class, 'index'])->name('detail-course');
     Route::post('/enroll-proses/{id}', [SelfenrollController::class, 'enroll'])->name('proses-enroll');
@@ -90,6 +91,7 @@ Route::middleware(['auth', "userAccess:admin"])->group(function () {
         Excel::import(new ImportUser, request()->file('file'));
         return back();
     })->name('import-siswa');
+
     Route::post('/import-guru', function () {
         Excel::import(new ImportTeacher, request()->file('file'));
         return back();
@@ -98,16 +100,29 @@ Route::middleware(['auth', "userAccess:admin"])->group(function () {
     // export Siswa dan guru
     Route::get('/expot-siswa', [ExportUsers::class, 'exportsiswa'])->name('export-siswa');
     Route::get('/expot-guru', [ExportUsers::class, 'exportguru'])->name('export-guru');
-    
+
     Route::get('/list-siswa', [AdminController::class, 'listsiswa'])->name('list-siswa');
     Route::get('/delete-siswa/{id}', [AdminController::class, 'deletesiswa'])->name('delete-siswa');
-
     Route::get('/list-guru', [AdminController::class, 'listguru'])->name('list-guru');
     Route::get('/delete-guru/{id}', [AdminController::class, 'deleteguru'])->name('delete-guru');
+    // kelas
+    Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
+    Route::post('/add-kelas', [KelasController::class, 'store'])->name('add-kelas');
+    Route::post('/edit-kelas/{id}', [KelasController::class, 'edit'])->name('edit-kelas');
+    Route::get('/hapus-kelas/{id}', [KelasController::class, 'destroy'])->name('hapus-kelas');
+    Route::get('/auto-search', [DetailKelasController::class, 'findNama'])->name('auto-search');
+    Route::get('detail-kelas/{id}', [DetailKelasController::class, 'index'])->name('detail-kelas');
+    // Matapelajaran
+    Route::get('/mapel', [MapelController::class, 'index'])->name('mapel');
+    Route::post('/add-mapel', [MapelController::class, 'store'])->name('add-mapel');
+    Route::post('/edit-mapel/{id}', [MapelController::class, 'edit'])->name('edit-mapel');
+    //course
+    Route::get('/course', [CourseController::class, 'index'])->name('course');
+
+
 
     Route::get('/Tambah-siswa', [TambahSiswaController::class, 'index'])->name('addSiswa');
     Route::get('/Tambah-guru', [TambahGuruController::class, 'index'])->name('addGuru');
     Route::post('/Tambah-guru-proses', [TambahGuruController::class, 'store'])->name('addGuruProses');
     Route::post('/Tambah-siswa-proses', [TambahSiswaController::class, 'store'])->name('addSiswaProses');
-
 });

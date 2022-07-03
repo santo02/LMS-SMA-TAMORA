@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 </head>
+
 <body>
     <div class="wrapper">
         <div class="header">
@@ -47,13 +48,29 @@
                             <a href="{{ Route('list-siswa') }}"><i class="fas fa-user"></i><span>Siswa</span></a>
                         </div>
                     </li>
+                    <li class="item">
+                        <a href="{{ Route('kelas') }}" class="menu-btn">
+                            <i class="fas fa-user-plus"></i>Kelas
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="{{ Route('mapel') }}" class="menu-btn">
+                            <i class="fas fa-user-plus"></i>Mata Pelajaran
+                        </a>
+                    </li>
+                    <li class="item">
+                        <a href="{{ Route('course') }}" class="menu-btn">
+                            <i class="fas fa-user-plus"></i>course
+                        </a>
+                    </li>
                 @elseif(Auth::user()->role == 'teacher')
                     <li class="item">
                         <a href="{{ Route('mycourse') }}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>My Course
                         </a>
-                    </li><li class="item" id="profile">
-                        <a href="{{Route('cs')}}" class="menu-btn">
+                    </li>
+                    <li class="item" id="profile">
+                        <a href="{{ Route('cs') }}" class="menu-btn">
                             <i class="fas fa-phone    "></i> Customer Service
                         </a>
                     </li>
@@ -69,7 +86,7 @@
                         </a>
                     </li>
                     <li class="item" id="profile">
-                        <a href="{{Route('siswacourse')}}" class="menu-btn">
+                        <a href="{{ Route('siswacourse') }}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>My Course
                         </a>
                     </li>
@@ -79,7 +96,7 @@
                         </a>
                     </li>
                     <li class="item" id="profile">
-                        <a href="{{Route('cs')}}" class="menu-btn">
+                        <a href="{{ Route('cs') }}" class="menu-btn">
                             <i class="fas fa-phone"></i> Customer Service
                         </a>
                     </li>
@@ -112,7 +129,17 @@
             $('#example').DataTable();
         });
     </script>
-{{-- @yield('js') --}}
+  <script type="text/javascript">
+    var path = "{{ route('auto-search') }}";
+    $('input.typeahead').typeahead({
+        source:  function (query, process) {
+        return $.get(path, { query: query }, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script>
+    {{-- @yield('js') --}}
 </body>
 
 </html>

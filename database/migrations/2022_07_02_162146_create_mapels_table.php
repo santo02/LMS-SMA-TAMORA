@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('my_courses', function (Blueprint $table) {
+        Schema::create('mapels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->references('id')->on('courses')->nullable();
-            $table->foreignId('student_id')->references('id')->on('students');
+            $table->string('nama_mapel');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('my_courses');
+        Schema::dropIfExists('mapels');
     }
 };
