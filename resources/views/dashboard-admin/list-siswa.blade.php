@@ -4,31 +4,31 @@
         <h3>Daftar Akun Siswa</h3>
 
         @if ($errors->has('file'))
-		<span class="invalid-feedback" role="alert">
-			<strong>{{ $errors->first('file') }}</strong>
-		</span>
-		@endif
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('file') }}</strong>
+            </span>
+        @endif
 
-		{{-- notifikasi sukses --}}
-		@if ($sukses = Session::get('sukses'))
-		<div class="alert alert-success alert-block">
-			<button type="button" class="close" data-dismiss="alert">×</button>
-			<strong>{{ $sukses }}</strong>
-		</div>
-		@endif
+        {{-- notifikasi sukses --}}
+        @if ($sukses = Session::get('sukses'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $sukses }}</strong>
+            </div>
+        @endif
 
         @if (session()->has('success'))
-                <div class="alert alert-success" role="alert">
-                    <p class="m-2">
-                        {{ session('success') }}
-                    </p>
-                </div>
-            @endif
+            <div class="alert alert-success" role="alert">
+                <p class="m-2">
+                    {{ session('success') }}
+                </p>
+            </div>
+        @endif
         <div class="d-flex flex-row-reverse my-3">
             <a href="#" class="p-2">
                 <button class="btn-im-custom" data-bs-toggle="modal" data-bs-target="#exampleModal">Import siswa</button>
             </a>
-            <a href="{{Route('export-siswa')}}" class="p-2">
+            <a href="{{ Route('export-siswa') }}" class="p-2">
                 <button class="btn-ex-custom ">Export siswa</button>
             </a>
             <a href="{{ Route('addSiswa') }}" class="p-2">
@@ -82,9 +82,12 @@
                         <td>{{ $student->birth_date }}</td>
                         <td>{{ $student->address }}</td>
                         <td>{{ $student->status }}</td>
-                        <td><a href="/delete-siswa/{{ $student->user_id }}" onclick="return confirm('Yakin?');"><i
-                                    class='fas fa-trash-alt' style='font-size:20px;color:red'></i></a></td>
-                    </tr>
+                        @if ($student->status == 'aktif')
+                            <td><button type="submit" class="btn btn-danger">Nonaktifkan</button></td>
+                        @else
+                            <td><button type="submit" class="btn btn-success btn-sm">Aktifkan</button></td>
+                @endif
+                </tr>
                 @endforeach
             </tbody>
         @endsection

@@ -10,7 +10,7 @@
         @endif
         <h1 class="title mt-4">Daftar siswa Kelas</h1>
         <hr>
-        <label for="" class=" pl-2 mb-4"><a href="{{ Route('kelas') }}">Kelas </a> / Detail kelas </label>
+        <label class=" pl-2 mb-4"><a href="{{ Route('kelas') }}">Kelas </a> / Detail kelas </label>
         <br>
         @foreach ($kelas as $kl)
             <input type="button" class="btn-add-custom mt-3 mb-4" value="add-siswa" data-bs-toggle="modal"
@@ -94,7 +94,6 @@
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -102,5 +101,4 @@
         </table>
     </div>
     </div>
-
 @endsection

@@ -19,6 +19,5 @@ class DetailKelasController extends Controller
         ->get();
 
         return response()->json($data);
-
     }
 }

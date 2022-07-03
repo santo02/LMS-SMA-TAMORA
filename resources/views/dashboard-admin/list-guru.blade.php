@@ -13,7 +13,7 @@
             <a href="#" class="p-2">
                 <button class="btn-im-custom" data-bs-toggle="modal" data-bs-target="#exampleModal">import Guru</button>
             </a>
-            <a href="{{Route('export-guru')}}" class="p-2">
+            <a href="{{ Route('export-guru') }}" class="p-2">
                 <button class="btn-ex-custom ">export Guru</button>
             </a>
             <a href="{{ Route('addGuru') }}" class="p-2">
@@ -67,8 +67,14 @@
                         <td>{{ $teacher->birth_date }}</td>
                         <td>{{ $teacher->address }}</td>
                         <td>{{ $teacher->status }}</td>
-                        <td><a href="/delete-guru/{{ $teacher->user_id }}" onclick="return confirm('Yakin?');"><i
-                                    class='fas fa-trash-alt' style='font-size:20px;color:red'></i></a></td>
+
+                        @if ($teacher->status == 'aktif')
+                            <td><button type="submit" class="btn btn-danger">Nonaktifkan</button></td>
+                        @else
+                            <td><button type="submit" class="btn btn-success btn-sm">Aktifkan</button></td>
+                        @endif
+
+
                     </tr>
                 @endforeach
             </tbody>
