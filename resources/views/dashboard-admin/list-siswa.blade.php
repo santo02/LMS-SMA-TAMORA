@@ -83,11 +83,42 @@
                         <td>{{ $student->address }}</td>
                         <td>{{ $student->status }}</td>
                         @if ($student->status == 'aktif')
-                            <td><button type="submit" class="btn btn-danger">Nonaktifkan</button></td>
+                            <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#change{{ $student->id }}">Nonaktifkan</button></td>
                         @else
-                            <td><button type="submit" class="btn btn-success btn-sm">Aktifkan</button></td>
-                @endif
-                </tr>
+                            <td><button type="submit" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#change{{ $student->id }}">Aktifkan</button></td>
+                        @endif
+                    </tr>
                 @endforeach
             </tbody>
-        @endsection
+        </table>
+    </div>
+    @foreach ($students as $student)
+        <div class="modal fade" id="change{{ $student->id }}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ganti Status</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah ada yakin @if ($student->status == 'aktif')
+                                <b>menonaktifkan</b>
+                            @else
+                                <b>aktifkan</b></b>
+                            @endif user !</p>
+                    </div>
+                    <form action="{{ route('changeStatus') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $student->id }}" />
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Batalkan</button>
+                            <input type="submit" class="btn btn-danger" value="Ubah">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+@endsection

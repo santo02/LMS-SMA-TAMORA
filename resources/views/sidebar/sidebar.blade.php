@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="sidebar.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/sidebar.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/list-style.css') }}">
-    
+
     @yield('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
@@ -113,7 +113,7 @@
             @yield('content')
 
         </div>
-
+        
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

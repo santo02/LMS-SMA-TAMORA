@@ -12,7 +12,7 @@ class AdminController extends Controller
     public function listsiswa(){
         $students = DB::table('students')
         ->join('users', 'user_id', '=', 'users.id')
-        ->select('users.email','users.status', 'students.*')
+        ->select('users.email','users.status as status', 'students.*', 'users.id as id')
         ->get();
 
         return view('dashboard-admin.list-siswa',['students'=> $students]);
@@ -21,7 +21,7 @@ class AdminController extends Controller
     public function listguru(){
         $teachers = DB::table('teachers')
         ->join('users', 'user_id', '=', 'users.id')
-        ->select('users.email', 'users.status','teachers.*')
+        ->select('users.email', 'users.status as status','teachers.*', 'users.id as id')
         ->get();
 
         return view('dashboard-admin.list-guru',['teachers'=> $teachers]);
@@ -37,5 +37,20 @@ class AdminController extends Controller
         User::destroy($id);
 
         return redirect()->route('list-siswa')->with('success', 'Berhasil Dihapus');
+    }
+
+    public function changeStatus(){
+        $users = User::find(Request()->id);
+
+        if($users->status == 'aktif'){
+            $data = 'nonaktif';
+        }else{
+            $data = 'aktif';
+        }
+
+        $users->status = $data;
+        $users->save();
+
+        return redirect()->back()->with('success', 'Berhasil ganti status');
     }
 }

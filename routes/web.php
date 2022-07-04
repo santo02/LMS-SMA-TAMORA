@@ -106,6 +106,7 @@ Route::middleware(['auth', "userAccess:admin"])->group(function () {
     Route::get('/delete-siswa/{id}', [AdminController::class, 'deletesiswa'])->name('delete-siswa');
     Route::get('/list-guru', [AdminController::class, 'listguru'])->name('list-guru');
     Route::get('/delete-guru/{id}', [AdminController::class, 'deleteguru'])->name('delete-guru');
+    Route::post('/change_status', [AdminController::class, 'changeStatus'])->name('changeStatus');
     // kelas
     Route::get('/kelas', [KelasController::class, 'index'])->name('kelas');
     Route::post('/add-kelas', [KelasController::class, 'store'])->name('add-kelas');

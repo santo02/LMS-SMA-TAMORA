@@ -67,15 +67,42 @@
                         <td>{{ $teacher->birth_date }}</td>
                         <td>{{ $teacher->address }}</td>
                         <td>{{ $teacher->status }}</td>
-
                         @if ($teacher->status == 'aktif')
-                            <td><button type="submit" class="btn btn-danger">Nonaktifkan</button></td>
+                            <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#change{{ $teacher->id }}">Nonaktifkan</button></td>
                         @else
-                            <td><button type="submit" class="btn btn-success btn-sm">Aktifkan</button></td>
+                            <td><button type="submit" class="btn btn-success" data-bs-toggle="modal"
+                                    data-bs-target="#change{{ $teacher->id }}">Aktifkan</button></td>
                         @endif
-
-
                     </tr>
                 @endforeach
             </tbody>
-        @endsection
+        </table>
+    </div>
+    @foreach ($teachers as $teacher)
+        <div class="modal fade" id="change{{ $teacher->id }}" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ganti Status</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah ada yakin @if ($teacher->status == 'aktif')
+                            <b>menonaktifkan</b> @else
+                            <b>aktifkan</b></b>
+                        @endif user !</p>
+                    </div>
+                    <form action="{{ route('changeStatus') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $teacher->id }}" />
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Batalkan</button>
+                            <input type="submit" class="btn btn-danger" value="Ubah">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+@endsection
