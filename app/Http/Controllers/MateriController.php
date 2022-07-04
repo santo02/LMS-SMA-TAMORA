@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Materi;
 use App\Models\Modules;
 use App\Models\Teachers;
 use App\Models\User;
@@ -11,35 +12,34 @@ use Illuminate\Support\Facades\DB;
 
 class MateriController extends Controller
 {
-    public function index($id, $week){
-        return view('dashboard-guru.Tambahmateri', ['id' => $id, 'week' => $week]);
-    }
-    public function show($id, $week){
-        $module = DB::table('modules')
-        ->join('courses', 'modules.course_id', '=', 'courses.id')
-        ->join('teachers', 'teachers.id', '=', 'modules.theachers_id')
-        ->join('users', 'users.id', '=', 'teachers.user_id')
-        ->where('courses.id', '=', $id)
-        ->where('modules.week', '=', $week)
-        ->select('modules.*', 'users.name')
-        ->get();
+    public function index($id){
 
-        return view('dashboard-guru.materi', ["module" => $module]);
-
+        return view('dashboard-guru.Tambahmateri', compact('id'));
     }
-    public function store(Request $request, $id){
+
+    // public function show($id, $week){
+    //     $module = DB::table('modules')
+    //     ->join('courses', 'modules.course_id', '=', 'courses.id')
+    //     ->join('teachers', 'teachers.id', '=', 'modules.theachers_id')
+    //     ->join('users', 'users.id', '=', 'teachers.user_id')
+    //     ->where('courses.id', '=', $id)
+    //     ->where('modules.week', '=', $week)
+    //     ->select('modules.*', 'users.name')
+    //     ->get();
+
+    //     return view('dashboard-guru.materi', ["module" => $module]);
+
+    // }
+    public function store(Request $request){
         $fields = $request->validate([
-            'topic' => 'required|string',
-            'content' => 'required|string',
-            'week' => 'required|string',
-            'sesion' => 'required|string',
-            'sesison_date' => 'required|date|date_format:Y-m-d',
+            'topik' => 'required|string',
+            'bab' => 'required|string',
+            'T_mulai' => 'required|date',
+            'T_akhir' => 'required|date',
+            'deskripsi' => 'required|string',
             'file' => 'required',
-            'file.*' => 'mimes:pdf,docx,doc,zip'|'max:2048',
+            'file.*' => 'mimes:pdf,docx,doc,zip,jpg,png,jpeg'|'max:2048',
         ]);
-        $users_id = Auth::User()->id;
-        $theachers_id = Teachers::where('user_id', $users_id)->first()->id;
-        $course_id = $id;
 
         $fileName = '';
         if ($file = $request->hasFile('file')) {
@@ -50,16 +50,15 @@ class MateriController extends Controller
             $file->move($destinationPath, $fileName);
 
 
-            Modules::create([
-                'course_id' => $course_id,
-                'topic' => $fields['topic'],
-                'content' => $fields['content'],
-                'week' => $fields['week'],
-                'sesion' => $fields['sesion'],
-                'sesison_date' => $fields['sesison_date'],
-                'jenis' => 'materi',
-                'theachers_id' => $theachers_id,
-                'file' => $fileName
+            Materi::create([
+                'id_course' => $request->id_course,
+                'topik' => $fields['topik'],
+                'bab' => $fields['bab'],
+                'T_mulai' => $fields['T_mulai'],
+                'T_akhir' => $fields['T_akhir'],
+                'Deskripsi' => $fields['deskripsi'],
+                'file' => $fileName,
+                'lampiran' => $request->lampiran,
             ]);
             return back()->with('success', 'Berhasil Ditambahkan!');
         }

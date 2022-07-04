@@ -19,45 +19,65 @@
         </div>
     @endif
     <div class="box-content container">
-        <form action="{{ Route('add-materi-proses', $id) }}" method="post" enctype="multipart/form-data" class="form-field">
+        <form action="/proses-add-materi" method="post" enctype="multipart/form-data" class="form-field">
             @csrf
-            <div class="form-group">
-                <label for="formGroupExampleInput">Topik</label>
-                <input type="text" name="topic" class="form-control" id="formGroupExampleInput" />
-            </div>
-            <div class="form-group">
-                <label for="formGroupExampleInput">content</label>
-                <input type="text" name="content" class="form-control" id="formGroupExampleInput" />
-            </div>
+            {{-- @foreach ($id_c as $id) --}}
+            <input type="hidden" name="id_course" value="{{$id}}">
+            {{-- @endforeach --}}
 
-            <input type="hidden" name="week" class="form-control" value="{{ $week }}"
-                id="formGroupExampleInput" />
-
-
-            <div class="form-group">
-                <label for="formGroupExampleInput2">Sesi ke</label>
-                <select class="form-select" name="sesion" aria-label="Default select example">
-                    <option>Sesi Ke-</option>
-                    @for ($i = 1; $i < 6; $i++)
-                        <option value="{{ $i }}">{{ $i }}</option>
-                        {{-- @if ($course->minggu == $i) selected @endif --}}
-                    @endfor
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="formGroupExampleInput2">Tanggal sesi</label>
-                <input type="date" name="sesison_date" class="form-control" id="formGroupExampleInput2"
-                    placeholder="masukkan sesi (number)" />
+            <div class="mb-3">
+                <label for="" class="form-label">Topik</label></label>
+                <input type="text" name="topik" class="form-control  @error('topik', 'post') is-invalid @enderror">
+                @error('topik')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
-                <label for="formFileMultiple" class="form-label">File</label>
-                <input class="form-control" name="file" type="file" id="formFileMultiple" multiple />
+                <label for="" class="form-label">Bab</label></label>
+                <input type="text" name="bab" class="form-control  @error('bab', 'post') is-invalid @enderror">
+                @error('bab')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
-            <div class="d-flex my-3">
-                <a>
-                    <button class="btn-add-custom">Create</button>
-                </a>
+            <div class="mb-3">
+                <label for="" class="form-label">Tanggal Mulai</label></label>
+                <input type="date" name="T_mulai" class="form-control  @error('T_mulai', 'post') is-invalid @enderror">
+                @error('T_mulai')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
-        </form>
+            <div class="mb-3">
+                <label for="" class="form-label">Tanggal Berakhir</label></label>
+                <input type="date" name="T_akhir" class="form-control  @error('T_akhir', 'post') is-invalid @enderror">
+                @error('T_akhir')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">File</label></label>
+                <input type="file" name="file" class="form-control  @error('file', 'post') is-invalid @enderror">
+                @error('file')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="mb-3">
+                <label for="" class="form-label">Lampiran lainnya </label></label>
+                <small>(Tidak wajib)</small>
+                <input type="text" name="lampiran" class="form-control  @error('lampiran', 'post') is-invalid @enderror">
+                @error('lampiran')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="" class="form-label">Deskripsi</label></label>
+                <Textarea name="deskripsi" class="form-control  @error('deskripsi', 'post') is-invalid @enderror"></Textarea>
+                @error('deskripsi')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            </div>
+            <button type="submit" class="btn-add-custom">Simpan</button>
+    </div>
+    </form>
     </div>
 @endsection

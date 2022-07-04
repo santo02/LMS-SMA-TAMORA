@@ -70,15 +70,17 @@ Route::middleware(['auth', "userAccess:student"])->group(function () {
 
 Route::middleware(['auth', "userAccess:teacher"])->group(function () {
     Route::get('/my-course', [CourseGuruController::class, 'index'])->name('mycourse');
-    Route::post('/add-courses-old', [MyCourseController::class, 'store']);
-    Route::get('/reset-course/{id}', [EnrollmenController::class, 'reset'])->name('delete-course');
+    // Route::post('/add-courses-old', [MyCourseController::class, 'store']);
+    // Route::get('/reset-course/{id}', [EnrollmenController::class, 'reset'])->name('delete-course');
+    Route::get('/moduletugas/{id}', [moduletugasController::class, 'index'])->name('moduletugas');
+    Route::get('/add-materi/{id}', [MateriController::class, 'index'])->name('add-materi');
+    Route::post('/proses-add-materi', [MateriController::class, 'store'])->name('add-materi');
 
-    Route::get('/add-materi/{id}/{week}', [MateriController::class, 'index'])->name('add-materi');
     Route::post('/add-materi-proses/{id}', [MateriController::class, 'store'])->name('add-materi-proses');
     Route::get('/materi/{id}/{week}', [MateriController::class, 'show'])->name('materi');
     Route::get('/delete-materi/{id}', [MateriController::class, 'delete'])->name('delete-materi');
 
-    Route::get('/moduletugas/{id}', [moduletugasController::class, 'index'])->name('moduletugas');
+
     Route::post('/enroll', [EnrollmenController::class, 'store'])->name('enroll');
 
     Route::get('/delete-course/{id}', [MyCourseController::class, 'delete'])->name('delete-course');
@@ -123,6 +125,10 @@ Route::middleware(['auth', "userAccess:admin"])->group(function () {
     Route::post('/add-course', [CourseController::class, 'store'])->name('add-course');
     Route::post('/edit-course/{id}', [CourseController::class, 'update'])->name('edit-course');
     Route::get('/delete-course/{id}', [CourseController::class, 'delete'])->name('delete-course');
+
+    Route::post('/add-siswa-kelas', [DetailKelasController::class, 'store'])->name('add-siswa-kelas');
+    Route::get('/delete-siswa-kelas/{id}', [DetailKelasController::class, 'delete'])->name('delete-siswa-kelas');
+
 
     Route::get('/Tambah-siswa', [TambahSiswaController::class, 'index'])->name('addSiswa');
     Route::get('/Tambah-guru', [TambahGuruController::class, 'index'])->name('addGuru');

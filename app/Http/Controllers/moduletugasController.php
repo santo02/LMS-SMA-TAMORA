@@ -14,13 +14,13 @@ class moduletugasController extends Controller
 
     public function index($id)
     {
-    // $nis = DB::table('courses')
-    //     ->join('my_courses', 'courses.id', '=', 'my_courses.course_id')
-    //     ->join('students', 'students.id', '=', 'my_courses.student_id')
-    //     ->join('users', 'users.id', '=', 'students.user_id')
-    //     ->where('courses.id', '=', $id)
-    //     ->select('students.NIS', 'users.name')
-    //     ->get();
+        // $nis = DB::table('courses')
+        //     ->join('my_courses', 'courses.id', '=', 'my_courses.course_id')
+        //     ->join('students', 'students.id', '=', 'my_courses.student_id')
+        //     ->join('users', 'users.id', '=', 'students.user_id')
+        //     ->where('courses.id', '=', $id)
+        //     ->select('students.NIS', 'users.name')
+        //     ->get();
 
 
         // $module = DB::table('modules')
@@ -35,10 +35,8 @@ class moduletugasController extends Controller
 
         $course = Courses::where('id', $id)->select('id')->get();
         return view('dashboard-guru.moduletugas', ["course" => $course]);
-
     }
     public function reset()
     {
-
     }
 }

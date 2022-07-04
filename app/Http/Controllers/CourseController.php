@@ -24,6 +24,7 @@ class CourseController extends Controller
         ->join('teachers', 'teachers.id', '=', 'courses.pengajar')
         ->join('kelas', 'kelas.id', '=', 'courses.kelas')
         ->select('courses.*', 'mapels.nama_mapel','courses.deskripsi', 'kelas.nama_kelas', 'kelas.tahun_ajaran', 'teachers.name')
+        ->orderBy('mapels.nama_mapel', 'ASC')
         ->get();
 
         return view('dashboard-admin.course', ["mapel" => $mapel, "guru" => $teacher, "kelas" => $kelas, "courses"=> $course]);

@@ -19,20 +19,6 @@
                 </p>
             </div>
         @endif
-        @if (session()->has('reset'))
-            <div class="alert alert-success" role="alert">
-                <p class="m-2">
-                    {{ session('reset') }}
-                </p>
-            </div>
-        @endif
-        @if (session()->has('gagal_reset'))
-            <div class="alert alert-danger" role="alert">
-                <p class="m-2">
-                    {{ session('gagal_reset') }}
-                </p>
-            </div>
-        @endif
         <div>
             <div class="out-box">
                 <div class="content-box">
@@ -51,7 +37,9 @@
                             {{-- Materi --}}
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
-                                <button class="btn-add m-4 position-absolute mr-auto">+Add Materi</button>
+                                @foreach ($course as $c)
+                                    <a href="/add-materi/{{$c->id}}"> <button class="btn-add m-4 position-absolute mr-auto">+Add Materi</button></a>
+                                @endforeach
                             </div>
 
                             {{-- Tugas --}}
@@ -64,7 +52,7 @@
                 <div class="enrollment-bar">
                     <div class="right-box">
                         <div class="thead-enroll">
-                            <h1 class="enroll-title">Enrolled Students</h1>
+                            <h1 class="enroll-title">list Siswa</h1>
                             <li class="fas fa-cog set-item" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 style="font-size: 20px"></li>
                             <!-- Modal -->
