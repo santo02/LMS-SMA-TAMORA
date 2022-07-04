@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Login;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
+    public function __construct(){
+        $this->Login = new Login();
+    }
+
     public function index()
     {
         return view('login.login');
@@ -21,14 +26,13 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)){
-            if(auth()->user()->status == 'aktif'){
-                $request->session()->regenerate();
-                return redirect()->intended('dashboard');
-            }
-            else{
-                return redirect()->route('login')->with('nonaktif', 'Login tidak berhasil!');
-            }
+        $data = $this->Login->aksi($request->email);
+
+        if($data[0]->status == 'aktif'){
+            Auth::attempt($credentials);
+            return redirect()->intended('dashboard');
+        }else{
+            return redirect()->route('login')->with('nonaktif', 'Login tidak berhasil!');
         }
 
         return redirect()->route('login')->with('nonaktif', 'Login tidak berhasil!');
