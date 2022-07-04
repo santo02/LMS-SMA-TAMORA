@@ -9,12 +9,10 @@ class Courses extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
-        'minggu',
+        'mapel',
+        'kelas',
+        'pengajar',
         'thumbnail',
-        'jurusan',
         'deskripsi',
-        'theachers_id',
-        'enroll_key',
     ];
 }

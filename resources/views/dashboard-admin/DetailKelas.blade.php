@@ -1,4 +1,8 @@
 @extends('sidebar.sidebar');
+@section('css')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+@endsection
 @section('content')
     <div class="col-md-10 container p-4 bg-light">
         @if (session()->has('success'))
@@ -31,10 +35,7 @@
                                     <input type="text" class="typeahead form-control" name="nis" id="nis"
                                         value="">
                                 </div>
-                                <div class="mb-3">
-                                    <label for="" class="form-label">Nama siswa</label>
-                                    <input type="text" name="nama_siswa" class=" form-control" value="">
-                                </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Simpan perubahan</button>
@@ -49,9 +50,8 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Nis</th>
+                    <th scope="col">NIS</th>
                     <th scope="col">Nama</th>
-                    <th scope="col">edit</th>
                     <th scope="col">Delete</th>
                 </tr>
             </thead>
@@ -61,8 +61,7 @@
                     </th>
                     <td></td>
                     <td></td>
-                    <td><i class="fas fa-edit action-item" style="font-size: 20px; color: blue" data-bs-toggle="modal"
-                            data-bs-target="#edit"></i></td>
+                    
                     <td>
                         <li class="fas fa-trash-alt action-item" data-bs-toggle="modal" data-bs-target="#exampleModal"
                             style="font-size: 20px; color: red"></li>
@@ -79,6 +78,7 @@
                             <div class="modal-body">
                                 <form action="" method="POST">
                                     @csrf
+
                                     <div class="mb-3">
                                         <label for="" class="form-label">Nama kelas</label>
                                         <input class=" form-control" type="text" name="mapels" value="">
@@ -101,4 +101,19 @@
         </table>
     </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/5.0.2/bootstrap3-typeahead.min.js"></script>
+    <script type="text/javascript">
+        var route = "{{ url('/auto-search') }}";
+        $('#nis').typeahead({
+            source: function(query, process) {
+                return $.get(route, {
+                    query: query
+                }, function(data) {
+                    return process(data);
+                });
+            }
+        });
+    </script>
 @endsection

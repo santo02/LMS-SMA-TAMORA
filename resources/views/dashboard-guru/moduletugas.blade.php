@@ -36,47 +36,27 @@
         <div>
             <div class="out-box">
                 <div class="content-box">
-                    <div class="main-content">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
-                                    type="button" role="tab" aria-controls="home" aria-selected="true">
-                                    Materi
-                                </button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
-                                    type="button" role="tab" aria-controls="profile" aria-selected="false">
-                                    Tugas
-                                </button>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel"
-                                aria-labelledby="home-tab">
-                                @for ($i = 1; $i < 17; $i++)
-                                    <a href="{{ Route('materi', ['id' => $course[0]->id, 'week' => $i]) }}">
-                                        <p class="mt-3">Materi Minggu Ke-{{ $i }}</p>
-                                    </a>
-                                    <a href="{{ Route('add-materi', ['id' => $course[0]->id, 'week' => $i]) }}">
-                                        <button class="btn-add">+Add Materi</button>
-                                    </a>
-                                    <hr>
-                                @endfor
-                                {{-- -- @if ($mod->week == 2)
-                                    <p>topik minggu 2</p>
-                                    <a href="{{ Route('materi', ['id'=>$co->id, 'week'=>$mod->week]) }}"><p>{{$mod->topic}}</p></a>
-                                    <a href="{{ Route('add-materi', $co->id) }}">
-                                        <button class="btn-add">+Add Materi</button>
-                                    </a>
-                                    <hr> --}}
+                    <div class="main-content container">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                                    aria-selected="true">Materi</button>
+                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab"
+                                    data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                                    aria-selected="false">Tugas</button>
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div>
-                                    <h1 class="week-title">Tugas week 1</h1>
-                                    <p>Sesi 1 : <a href="">Termodinamika</a></p>
-                                    <button class="btn-add">+Add Tugas</button>
-                                </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            {{-- Materi --}}
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                aria-labelledby="nav-home-tab">
+                                <button class="btn-add m-4 position-absolute mr-auto">+Add Materi</button>
+                            </div>
+
+                            {{-- Tugas --}}
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                <button class="btn-add m-4 position-absolute mr-auto">+Add tugas</button>
                             </div>
                         </div>
                     </div>
@@ -98,10 +78,10 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            @foreach ($course as $co)
-                                                <a href="/reset-course/{{ $co->id }}"><button type="button"
-                                                        class="btn btn-danger">Reset</button></a>
-                                            @endforeach
+                                            {{-- @foreach ($course as $co) --}}
+                                            <a href="#"><button type="button"
+                                                    class="btn btn-danger">Reset</button></a>
+                                            {{-- @endforeach --}}
                                             <button type="button" class=" btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#myModal">
                                                 Enroll Student
@@ -128,11 +108,10 @@
                                                                         name="name"class="form-control" />
                                                                 </div>
                                                                 <div class="mb-3">
-                                                                    @foreach ($course as $co)
-                                                                        <input type="hidden" name="id_course"
-                                                                            class="form-control"
-                                                                            value="{{ $co->id }}" />
-                                                                    @endforeach
+                                                                    {{-- @foreach ($course as $co) --}}
+                                                                    <input type="hidden" name="id_course"
+                                                                        class="form-control" value="" />
+                                                                    {{-- @endforeach --}}
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="submit" class="btn btn-primary">
@@ -158,11 +137,12 @@
                             </div>
                         </div>
                         <div class="list-enroll bg-light">
-                            @foreach ($nama as $na)
-                                <div class="namess border border-secondary border-opacity-75 m-2 rounded">
-                                    <p class="m-1 "><b>{{ $na->NIS }}</b> - {{ $na->name }} </p>
-                                </div>
-                            @endforeach
+                            {{-- @foreach ($nama as $na) --}}
+                            <div class="namess border border-secondary border-opacity-75 m-2 rounded">
+                                {{-- <p class="m-1 "><b>{{ $na->NIS }}</b> - {{ $na->name }} </p> --}}
+                                <p class="m-1 "><b>NIS</b> - Nama </p>
+                            </div>
+                            {{-- @endforeach --}}
                         </div>
                     </div>
                 </div>

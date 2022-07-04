@@ -33,19 +33,18 @@
             <hr>
         </div>
         <h1 class="title mt-4">Daftar Kelas</h1>
-        @foreach ($kelas as $k)
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Nama Kelas</th>
-                        <th scope="col">Tahun ajaran</th>
-                        <th scope="col">Detail</th>
-                        <th scope="col">edit</th>
-                        <th scope="col">Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- @foreach --}}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nama Kelas</th>
+                    <th scope="col">Tahun ajaran</th>
+                    <th scope="col">Detail</th>
+                    <th scope="col">edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($kelas as $k)
                     <tr>
                         </th>
                         <td>{{ $k->nama_kelas }}</td>
@@ -54,12 +53,12 @@
                                     class="btn btn-sm btn-success">Detail</button></a></td>
                         <td><i class="fas fa-edit action-item" style="font-size: 20px; color: blue" data-bs-toggle="modal"
                                 data-bs-target="#edit{{ $k->id }}"></i></td>
-                        <td>
+                        {{-- <td>
                             <a href="/hapus-kelas/{{ $k->id }}">
                                 <li class="fas fa-trash-alt action-item" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal" style="font-size: 20px; color: red"></li>
                             </a>
-                        </td>
+                        </td> --}}
                     </tr>
                     <div class="modal fade" id="edit{{ $k->id }}" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -94,9 +93,10 @@
                             </div>
                         </div>
                     </div>
-                </tbody>
-            </table>
-        @endforeach
+                @endforeach
+            </tbody>
+        </table>
+
     </div>
     </div>
 @endsection

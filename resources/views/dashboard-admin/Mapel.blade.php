@@ -36,7 +36,6 @@
                         <tr>
                             <th scope="col">Mata pelajaran</th>
                             <th scope="col">edit</th>
-                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,10 +45,10 @@
                                 <td>{{ $m->nama_mapel }}</td>
                                 <td><i class="fas fa-edit action-item" style="font-size: 20px; color: blue"
                                         data-bs-toggle="modal" data-bs-target="#edit{{ $m->id }}"></i></td>
-                                <td>
+                                {{-- <td>
                                     <li class="fas fa-trash-alt action-item" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal" style="font-size: 20px; color: red"></li>
-                                </td>
+                                </td> --}}
                             </tr>
                             <div class="modal fade" id="edit{{ $m->id }}" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">

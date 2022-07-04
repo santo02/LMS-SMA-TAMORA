@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="sidebar.css" />
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/sidebar.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/list-style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/course.css') }}">
+    
     @yield('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
@@ -58,7 +58,7 @@
                         </a>
                     </li>
                     <li class="item">
-                        <a href="#" class="menu-btn">
+                        <a href="{{Route('course')}}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>course
                         </a>
                     </li>

@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string('mapel');
-            $table->string('kelas');
-            $table->string('pengajar');
+            $table->foreignId('mapel')->references('id')->on('mapels')->onDelete('cascade');
+            $table->foreignId('kelas')->references('id')->on('kelas')->onDelete('cascade');
+            $table->foreignId('pengajar')->references('id')->on('teachers')->onDelete('cascade');
             $table->string('thumbnail');
             $table->string('deskripsi');
             $table->timestamps();

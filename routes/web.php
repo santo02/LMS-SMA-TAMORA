@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CourseGuruController;
 use App\Http\Controllers\CScontroller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DetailKelasController;
@@ -68,8 +69,8 @@ Route::middleware(['auth', "userAccess:student"])->group(function () {
 });
 
 Route::middleware(['auth', "userAccess:teacher"])->group(function () {
-    Route::get('/my-course', [MyCourseController::class, 'index'])->name('mycourse');
-    Route::post('/add-course', [MyCourseController::class, 'store'])->name('add-course');
+    Route::get('/my-course', [CourseGuruController::class, 'index'])->name('mycourse');
+    Route::post('/add-courses-old', [MyCourseController::class, 'store']);
     Route::get('/reset-course/{id}', [EnrollmenController::class, 'reset'])->name('delete-course');
 
     Route::get('/add-materi/{id}/{week}', [MateriController::class, 'index'])->name('add-materi');
@@ -118,8 +119,9 @@ Route::middleware(['auth', "userAccess:admin"])->group(function () {
     Route::post('/edit-mapel/{id}', [MapelController::class, 'edit'])->name('edit-mapel');
     //course
     Route::get('/course', [CourseController::class, 'index'])->name('course');
-
-
+    Route::post('/add-course', [CourseController::class, 'store'])->name('add-course');
+    Route::post('/edit-course/{id}', [CourseController::class, 'update'])->name('edit-course');
+    Route::get('/delete-course/{id}', [CourseController::class, 'delete'])->name('delete-course');
 
     Route::get('/Tambah-siswa', [TambahSiswaController::class, 'index'])->name('addSiswa');
     Route::get('/Tambah-guru', [TambahGuruController::class, 'index'])->name('addGuru');

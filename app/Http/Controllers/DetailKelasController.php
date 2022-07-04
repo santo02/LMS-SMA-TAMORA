@@ -14,10 +14,17 @@ class DetailKelasController extends Controller
     }
 
     public function findNama(Request $request){
-        $data = Students::select('NIS')
-        ->where("NIS","LIKE","%{$request->query}%")
+        $query = $request->get('query');
+        $data = Students::where("NIS", "LIKE",'%'.$query.'%')
         ->get();
 
         return response()->json($data);
+    }
+    public function store(Request $request){
+        $fields = $request->validate([
+            'nis' => 'required|string'
+        ]);
+        Students::where('nis', $fields['nis'])->get();
+
     }
 }
