@@ -39,17 +39,14 @@
                             {{-- Materi --}}
                             <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
                                 aria-labelledby="nav-home-tab">
-                                <div class="button-add mb-4 p-2">
-                                    <a href="/add-materi/{{ $c->id }}"> <button class="btn-add mt-4">+Add
-                                            Materi</button></a>
-                                </div>
                                 @foreach ($materi as $m)
-                                    <div class="materi p-2">
+                                    <div class="materi mt-4 p-2">
                                         <small>{{ $m->T_mulai }} - {{ $m->T_akhir }}</small>
-                                        <a href="/detail-materi/{{ $m->id }}" style="text-decoration: none">
+                                        <a href="/detail-materi-siswa/{{ $m->id }}" style="text-decoration: none">
                                             <h5>{{ $m->topik }}</h5>
                                         </a>
                                         <h6> Bab:{{ $m->bab }}</h6>
+                                        <hr>
                                     </div>
                                 @endforeach
                                 <hr>
@@ -57,14 +54,10 @@
 
                             {{-- Tugas --}}
                             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                                <div class="button-add mb-4 p-2">
-                                    <a href="/add-tugas/{{ $c->id }}"> <button class="btn-add mt-4">+Add
-                                            Tugas</button></a>
-                                </div>
                                 @foreach ($tugas as $t)
-                                    <div class="materi p-2">
+                                    <div class="materi mt-4 p-2">
                                         <small>{{ $t->T_mulai }} - {{ $t->T_akhir }}</small>
-                                        <a href="/detail-tugas/{{ $t->id }}" style="text-decoration: none">
+                                        <a href="/detail-tugas-siswa/{{ $t->id }}" style="text-decoration: none">
                                             <h5>{{ $t->topik }}</h5>
                                         </a>
                                         <h6> Bab:{{ $t->bab }}</h6>

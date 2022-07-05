@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Courses;
-use App\Models\Kelas;
 use App\Models\Materi;
-use App\Models\MyCourse;
-use App\Models\Students;
 use App\Models\Tugas;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class moduletugasController extends Controller
+class ModuletugasControllerSiswa extends Controller
 {
-
     public function index($id)
     {
         $siswa = DB::table('courses')->join('kelas', 'courses.kelas', '=', 'Kelas.id')
@@ -39,6 +33,6 @@ class moduletugasController extends Controller
         ->select('mapels.nama_mapel', 'courses.id')
         ->get();
 
-        return view('dashboard-guru.moduletugas', ["course" => $course, 'materi'=> $materi,"siswa" => $siswa, "tugas" => $tugas]);
+        return view('dashboard-siswa.Siswamoduletugas', ["course" => $course, 'materi'=> $materi,"siswa" => $siswa, "tugas" => $tugas]);
     }
 }

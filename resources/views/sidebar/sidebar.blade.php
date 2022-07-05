@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 </head>
+
 <body>
     <div class="wrapper">
         <div class="header">
@@ -58,7 +59,7 @@
                         </a>
                     </li>
                     <li class="item">
-                        <a href="{{Route('course')}}" class="menu-btn">
+                        <a href="{{ Route('course') }}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>course
                         </a>
                     </li>
@@ -67,8 +68,9 @@
                         <a href="{{ Route('mycourse') }}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>My Course
                         </a>
-                    </li><li class="item" id="profile">
-                        <a href="{{Route('cs')}}" class="menu-btn">
+                    </li>
+                    <li class="item" id="profile">
+                        <a href="{{ Route('cs') }}" class="menu-btn">
                             <i class="fas fa-phone    "></i> Customer Service
                         </a>
                     </li>
@@ -79,12 +81,7 @@
                     </li>
                 @else
                     <li class="item" id="profile">
-                        <a href="{{ Route('course') }}" class="menu-btn">
-                            <i class="fas fa-user-plus"></i>Course
-                        </a>
-                    </li>
-                    <li class="item" id="profile">
-                        <a href="{{Route('siswacourse')}}" class="menu-btn">
+                        <a href="{{ Route('siswacourse') }}" class="menu-btn">
                             <i class="fas fa-user-plus"></i>My Course
                         </a>
                     </li>
@@ -94,16 +91,35 @@
                         </a>
                     </li>
                     <li class="item" id="profile">
-                        <a href="{{Route('cs')}}" class="menu-btn">
+                        <a href="{{ Route('cs') }}" class="menu-btn">
                             <i class="fas fa-phone"></i> Customer Service
                         </a>
                     </li>
                 @endif
-                <li class="item logout">
-                    <a href="{{ route('logout') }}" class="menu-btn">
+                <li class="item logout" data-bs-target="#logout" data-bs-toggle="modal">
+
+                    <a class="menu-btn">
                         <i class="fas fa-sign-out-alt"></i><span>Logout</span>
                     </a>
                 </li>
+
+            </div>
+        </div>
+        <div class="modal" id="logout">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Logout</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                       <p>Apakah anda ingin keluar?</p>
+                        <div class="modal-footer">
+                            <a href="{{ route('logout') }}"><button type="submit" class="btn btn-primary">Ya</button></a>
+                            <button type="reset" data-bs-dismiss="modal" class="btn btn-danger">Tidak</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!--sidebar end-->
@@ -127,7 +143,7 @@
             $('#example').DataTable();
         });
     </script>
-{{-- @yield('js') --}}
+    {{-- @yield('js') --}}
 </body>
 
 </html>

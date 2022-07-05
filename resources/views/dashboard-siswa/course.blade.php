@@ -1,22 +1,44 @@
 @extends('sidebar.sidebar')
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/dashboard.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/course.css') }}">
 @endsection
 @section('content')
-<h1 class="title-course">Course</h1>
-<div class="row row-cols-1 row-cols-md-2 g-4 container">
-    @foreach ($courses as $course)
-    <div class="col">
-        <div class="card">
-            <img src="{{ asset('thumbnail/'.$course->thumbnail) }}" class="card-img-top img-course" alt="..." />
-            <div class="card-body">
-                <a href="/detailcourse/{{$course->id}}"><h5 class="card-title">{{ $course->title }}</h5></a>
-                <p class="card-text">
-                    {{ $course->deskripsi }}
-                </p>
-            </div>
+    <div class="course shadow p-3  rounded m-4">
+        <h1 class="title-course">Course</h1>
+        <div class="d-flex my-3">
+            @if (session()->has('success'))
+                <div class="alert alert-success" role="alert">
+                    <p class="m-2">
+                        {{ session('success') }}
+                    </p>
+                </div>
+            @endif
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 ">
+            @foreach ($courses as $cou)
+                <div class="col">
+                    <div class="card border border-primary">
+                        <img src="{{ asset('thumbnail/' . $cou->thumbnail) }}" class="card-img-top img-course"
+                            alt="..." />
+                        <div class="card-body mt-">
+                            <hr>
+                            <h5 class="card-title">{{ $cou->nama_mapel }} <label for="">{{ $cou->nama_kelas }}
+                                    {{ $cou->tahun_ajaran }}</label></h5>
+                            <small class="text-success">{{ $cou->name }}</small><br>
+
+                            <p class="card-text mt-1">
+                                {{ $cou->deskripsi }}
+                            </p>
+                        </div>
+                        <div class="course-action ">
+                            <b><a href="/moduletugas/siswa/{{$cou->id}}" style="text-decoration: none;">
+                                    <p class="action-item">See Detail</p>
+                                </a></b>
+                        </div>
+                    </div>
+
+                </div>
+            @endforeach
         </div>
     </div>
-    @endforeach
-</div>
 @endsection

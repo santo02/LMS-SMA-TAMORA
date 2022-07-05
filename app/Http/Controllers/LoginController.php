@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->Login = new Login();
     }
 
@@ -26,16 +27,22 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        $data = $this->Login->aksi($request->email);
-
-        if($data[0]->status == 'aktif'){
-            Auth::attempt($credentials);
-            return redirect()->intended('dashboard');
-        }else{
-            return redirect()->route('login')->with('nonaktif', 'Login tidak berhasil!');
+        $data = $request->email;
+        $cek_email = DB::table('users')->where('email', $data)->select('status')->get();
+        // return $cek_email ;
+        if (count($cek_email) == 0) {
+            return back()->with('nonaktif', 'email tidak terdaftar!');
+        } else {
+            if ($cek_email[0]->status == 'aktif') {
+                if (Auth::attempt($credentials)) {
+                    $request->session()->regenerate();
+                    return redirect()->intended('/dashboard');
+                }
+                return back()->with('nonaktif', 'Login tidak berhasil!');
+            } else {
+                return back()->with('nonaktif', 'akun tidak aktif!');
+            }
         }
-
-        return redirect()->route('login')->with('nonaktif', 'Login tidak berhasil!');
     }
     public function logout()
     {

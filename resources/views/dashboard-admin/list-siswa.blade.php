@@ -83,10 +83,10 @@
                         <td>{{ $student->address }}</td>
                         <td>{{ $student->status }}</td>
                         @if ($student->status == 'aktif')
-                            <td><button type="submit" class="btn btn-danger" data-bs-toggle="modal"
+                            <td><button type="submit" class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#change{{ $student->id }}">Nonaktifkan</button></td>
                         @else
-                            <td><button type="submit" class="btn btn-success" data-bs-toggle="modal"
+                            <td><button type="submit" class="btn btn-success btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#change{{ $student->id }}">Aktifkan</button></td>
                         @endif
                     </tr>

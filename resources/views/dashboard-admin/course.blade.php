@@ -107,13 +107,12 @@
                             <hr>
                             <h5 class="card-title">{{ $cou->nama_mapel }}  <label for="">{{ $cou->nama_kelas }} {{ $cou->tahun_ajaran }}</label></h5>
                             <small class="text-success">{{ $cou->name }}</small><br>
-
                             <p class="card-text mt-1">
                                 {{ $cou->deskripsi }}
                             </p>
                         </div>
                         <div class="course-action mt--4">
-
+                            <a data-bs-toggle="modal" data-bs-target="#delete{{$cou->id}}"><i class="fas fa-trash set-item" style="font-size: 20px; color:red"></i></a>
                             <!-- Modal -->
                             <div class="modal fade" id="delete{{$cou->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">

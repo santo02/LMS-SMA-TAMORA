@@ -13,8 +13,8 @@ class Login extends Model
     protected $fillable = [
         'email','status'
     ];
-
     public function aksi($email){
-        return DB::table('users')->where('email', $email)->get('status');
+        $cek_email = DB::table('users')->where('email', $email)->get('status');
+        return $cek_email;
     }
 }
